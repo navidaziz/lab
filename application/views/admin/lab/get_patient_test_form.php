@@ -59,7 +59,11 @@ foreach($patient_tests as $patient_test){ ?>
       </tr>
       <tr>
         <?php } ?>
-        <td colspan="5" style="text-align:center"><form action="<?php echo site_url(ADMIN_DIR."lab/complete_test"); ?>" method="post" >
+        <td colspan="5" style="text-align:center">
+        
+        <form action="<?php echo site_url(ADMIN_DIR."lab/complete_test"); ?>" method="post" >
+
+        
             <input type="hidden" value="<?php echo $invoice_detail->invoice_id; ?>" name="invoice_id"  />
             <input class="btn btn-success" type="submit" value="Complete Test" name="Complete Test" />
           </form></td>

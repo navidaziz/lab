@@ -25,14 +25,14 @@ class Lab extends Admin_Controller{
      */ 
     public function index(){
 		
-		 $where = "`invoices`.`status` IN (1) ORDER BY `invoices`.`invoice_id`";
+		 $where = "`invoices`.`status` IN (1) ORDER BY `invoices`.`invoice_id` DESC";
 		 $this->data["forwarded_tests"]= $this->invoice_model->get_invoice_list($where, false);
 		 
 		 
-		 $where = "`invoices`.`status` IN (2) ORDER BY `invoices`.`invoice_id`";
+		 $where = "`invoices`.`status` IN (2) ORDER BY `invoices`.`invoice_id` DESC";
 		 $this->data["inprogress_tests"]= $this->invoice_model->get_invoice_list($where, false);
 		 
-		 $where = "`invoices`.`status` IN (3) ORDER BY `invoices`.`invoice_id`";
+		 $where = "`invoices`.`status` IN (3) ORDER BY `invoices`.`invoice_id` DESC";
 		 $this->data["completed_tests"]= $this->invoice_model->get_invoice_list($where, false);
 		 
 		 
@@ -147,7 +147,7 @@ class Lab extends Admin_Controller{
 	public function get_patient_test_form(){
 		//$this->data["view"] = ADMIN_DIR."invoices/invoices";
 		$invoice_id = (int) $this->input->post('invoice_id');
-		$where = "`invoices`.`status` IN (2) AND `invoices`.`invoice_id`= '".$invoice_id."'";
+		$where = "`invoices`.`status` IN (2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
 		$this->data["invoice_detail"]= $this->invoice_model->get_invoice_list($where, false)[0];
 		
 		$where = "`patient_tests`.`invoice_id` = '".$invoice_id."'";
@@ -186,7 +186,7 @@ class Lab extends Admin_Controller{
 				SET `status`='3'
 			    WHERE `invoice_id` = '".$invoice_id."'";
 		$this->db->query($query);
-		redirect(ADMIN_DIR."lab/");
+		redirect(ADMIN_DIR."reception/");
 		
 		}			
     

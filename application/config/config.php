@@ -69,7 +69,7 @@ spl_autoload_register(function($classname) {
 //$config['base_url']	= 'http://localhost/audios';
 
 //$config['base_url']	= 'http://192.168.0.100/alkhidmat';
-$config['base_url']	= 'http://localhost/alkhidmat';
+$config['base_url']	= 'http://localhost/lab';
 
 /*
 

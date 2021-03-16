@@ -27,6 +27,10 @@ class Reception extends Admin_Controller{
 		
 		$where = "`test_groups`.`status` IN (1) ORDER BY `test_groups`.`order`";
 		$this->data["test_groups"] = $this->test_group_model->get_test_group_list($where, false);
+
+		$where = "`invoices`.`status` IN (1,2,3) ORDER BY `invoices`.`invoice_id` DESC";
+		$this->data["all_tests"]= $this->invoice_model->get_invoice_list($where, false);
+
 		$this->load->view(ADMIN_DIR."reception/home", $this->data);        
     }
 	
@@ -72,6 +76,80 @@ class Reception extends Admin_Controller{
 			
 			
 		}
+
+
+		public function save_and_process(){
+		
+			$invoice_id = (int) $this->input->post("invoice_id");	
+			$test_token_id = (int) $this->input->post("test_token_id");
+			$group_ids = trim(trim($this->input->post("patient_group_test_ids")), ",");
+			
+			$query="UPDATE `invoices` 
+					SET `test_token_id`='".$test_token_id."',
+						`test_report_by`='".$this->session->userdata("user_id")."',
+						`status`='2'
+					WHERE `invoice_id` = '".$invoice_id."'";
+			$this->db->query($query);
+				
+			$query = "SELECT 
+					  `test_group_tests`.`test_group_id`,
+					  `tests`.`test_id`,
+					  `tests`.`test_category_id`,
+					  `tests`.`test_type_id`,
+					  `tests`.`test_name`,
+					  `tests`.`test_description`,
+					  `tests`.`normal_values` 
+					FROM
+					  `tests`,
+					  `test_group_tests`
+					WHERE  `tests`.`test_id` = `test_group_tests`.`test_id` 
+					AND `test_group_tests`.`test_group_id` IN (".$group_ids.") 
+					ORDER BY `test_group_tests`.`test_group_id` ASC, `test_group_tests`.`order` ASC";
+			$query_result = $this->db->query($query);
+			$all_tests = $query_result->result();
+			$order=1;
+			foreach($all_tests as $test){
+				$query = "INSERT INTO `patient_tests`(`invoice_id`, 
+													  `test_group_id`, 
+													  `test_category_id`, 
+													  `test_type_id`, 
+													  `test_id`, 
+													  `test_name`, 
+													  `test_normal_value`, 
+													  `test_result`, 
+													  `remarks`,
+													  `created_by`,
+													  `order`) 
+											VALUES('".$invoice_id."',
+												   '".$test->test_group_id."',
+												   '".$test->test_category_id."',
+													'".$test->test_type_id."',
+													'".$test->test_id."',
+													'".$test->test_name."',
+													'".$test->normal_values."',
+													'',
+													'',
+													'".$this->session->userdata("user_id")."',
+													'".$order++."')";
+				$this->db->query($query);
+				}
+			
+			
+			
+		redirect(ADMIN_DIR."reception/");
+			
+			}
+
+
+			public function complete_test(){
+				$invoice_id = (int) $this->input->post("invoice_id");
+				$query="UPDATE `invoices` 
+						SET `status`='3'
+						WHERE `invoice_id` = '".$invoice_id."'";
+				$this->db->query($query);
+				redirect(ADMIN_DIR."reception/");
+				
+				}	
     
     
 }        
