@@ -131,10 +131,28 @@
         </div>
          
         
-        <div style="height:270px;">
-        <h3><table class="table">
-        <tr><th>Total Price</th><td>00.00</td></tr>
-        </table></h3>
+        <div>
+
+
+
+        
+        
+       <div id="test_price_list" style="min-height: 180px;">
+        <table class="table table-bordered">
+        <tr><td>#</td><td>Test Name</td><td>Price</td></tr>
+        
+        </table>
+        </div>
+        <style>
+        
+        table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 5px !important;
+        </style>
+
+
+         <h4><table class="table">
+        <tr><th>Total Price</th><td id="test_total_price">00.00 Rs.</td></tr>
+        </table></h4> 
         <input type="submit" name="submit" value="Save and Print" class="btn btn-primary" style="width:100%">
         </div>
         
@@ -156,9 +174,10 @@
 		<div style="margin:1px; border:1px solid #CCC; border-radius:2px; margin-bottom:5px; -webkit-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);
 -moz-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);
 box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
-		<input style="display: inline;" name="test_group_id[]" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" />
+		<input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" />
     <strong style="margin-left:2px;"><?php echo substr($test_group->test_group_name,0,12); ?></strong>
-        <span style="font-size:9px; display:block; margin-left:30px !important"> Rs: <?php echo $test_group->test_price; ?>- <?php echo $test_group->test_time; ?>min</span>
+        <span style="font-size:9px; display:block; margin-left:30px !important"> Rs: <?php echo $test_group->test_price; ?> - 
+        <?php echo $test_group->test_time; ?>min</span>
         </div>
         </div>
         
@@ -319,6 +338,48 @@ function test_token(invoice_id, Patient_name, other_info){
 		     $('#test_form').modal('show'); 
         });
 		 }
+
+     prices  = [];
+     function set_price(test_group_id, test_group_name, test_price, test_time){
+
+      if($('#TG_'+test_group_id).is(':checked')){
+        prices[test_group_name] = {'price' : test_price, 'test_time' : test_time };
+      }else{
+        delete prices[test_group_name];
+      }
+     // prices.forEach(element => console.log(element));
+      var price_list = '<table class="table table-bordered"><tr><td>#</td><td>Test Name</td><td>Price</td></tr>';
+      var test_total_price = 0;
+      var count=0;
+      for (var key in prices) {
+        
+        if (prices.hasOwnProperty(key))
+            count = parseInt(count)+1;
+            price_list+='<tr><td>'+count+'</td>';
+            price_list+='<td>'+key+'</td>';
+            price_list+='<td>'+prices[key].price+'</td>';
+            price_list+='</td></tr>';
+            test_total_price = parseInt(test_total_price)+parseInt(prices[key].price);
+
+
+
+      }
+      price_list+= '</table>';
+      $('#test_price_list').html(price_list);
+      $('#test_total_price').html(test_total_price+'.00 Rs.');
+      //prices.forEach(test_price_list_function);
+      // for (i = 0; i < prices.length; i++) {
+      //     console.log(numbers[i]);
+      //   } 
+              
+      
+     }
+
+     function test_price_list_function(test_group_name, values){
+       alert();
+      //$('#test_price_list').html(price_list);
+      console.log(test_group_name);
+     }
 	 
 </script>
 

@@ -27,7 +27,7 @@ class Reception extends Admin_Controller{
 		
 		$where = "`test_groups`.`status` IN (1) ORDER BY `test_groups`.`order`";
 		$this->data["test_groups"] = $this->test_group_model->get_test_group_list($where, false);
-
+		
 		$where = "`invoices`.`status` IN (1,2,3) ORDER BY `invoices`.`invoice_id` DESC";
 		$this->data["all_tests"]= $this->invoice_model->get_invoice_list($where, false);
 
