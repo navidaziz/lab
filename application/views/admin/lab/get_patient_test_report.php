@@ -45,11 +45,11 @@
       </tr>
       <?php
       $count = 1;
-      foreach ($invoice->invoice_details as $invoice_detail) { ?>
+      foreach ($invoice->invoice_details as $invoicedetail) { ?>
         <tr>
           <th style="width: 30%;"><?php echo $count++; ?></th>
-          <td><?php echo $invoice_detail->test_group_name; ?></td>
-          <td><?php echo $invoice_detail->price; ?></td>
+          <td><?php echo $invoicedetail->test_group_name; ?></td>
+          <td><?php echo $invoicedetail->price; ?></td>
         </tr>
       <?php } ?>
       <tr>
@@ -71,6 +71,54 @@
   </div>
   <div class="col-md-8">
 
+  <table class="table table-bordered" style="text-align: left;">
+      <tr>
+        <td><table class="table" style="text-align: left;">
+      <tr>
+        <th>Invoice No:</th>
+        <td><?php echo $invoice_detail->invoice_id; ?></td>
+      </tr>
+      <tr>
+        <th>Test Token No.</th>
+        <td><?php echo $invoice_detail->test_token_id; ?></td>
+      </tr>
+      <tr>
+        <th>Patient Name: </th>
+        <td><?php echo $invoice_detail->patient_name; ?></td>
+      </tr>
+      <tr>
+        <th>Gender:  <?php echo $invoice_detail->patient_gender; ?></th>
+        <th>Age:  <?php echo @$invoice_detail->patient_age; ?></th>
+      </tr>
+     
+    </table></td>
+        <td>
+        
+        <table class="table " style="text-align: left;">
+      
+      <tr>
+        <th>Mobile No:</th>
+        <td><?php echo $invoice_detail->patient_mobile_no; ?></td>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <td><?php echo $invoice_detail->patient_address; ?></td>
+      </tr>
+      <tr>
+        <th>Refered By:</th>
+        <td><?php echo $invoice_detail->doctor_name . "( " . $invoice_detail->doctor_designation . " )"; ?></td>
+      </tr>
+      <tr>
+        <th>Date & Time:</th>
+        <td><?php echo date("d F, Y h:i:s", strtotime($invoice_detail->created_date)); ?></td>
+      </tr>
+    </table>
+        </td>
+      </tr>
+  </table>
+
+  
+
     <?php foreach ($patient_tests_groups as $patient_tests_group) { ?>
       <h3><?php echo $patient_tests_group->test_group_name; ?></h3>
       <table class="table table-bordered" style="text-align: left;">
@@ -87,55 +135,16 @@
           <tr>
             <td><?php echo $count++; ?></td>
             <td><?php echo $patient_test->test_name; ?></td>
-            <td><input onkeyup="update_test_value('<?php echo $patient_test->patient_test_id; ?>')" type="text" id="test_<?php echo $patient_test->patient_test_id; ?>_value" value="<?php echo $patient_test->test_result; ?>" /></td>
+            <td> <?php echo $patient_test->test_result; ?> </td>
             <td><?php echo $patient_test->test_normal_value; ?></td>
-            <td><input type="text" onkeyup="update_test_remarks('<?php echo $patient_test->patient_test_id; ?>')" id="test_<?php echo $patient_test->patient_test_id; ?>_remark" value="<?php echo $patient_test->remarks; ?>" /></td>
+            <td><?php echo $patient_test->remarks; ?> </td>
           </tr>
         <?php } ?>
       </table>
     <?php  } ?>
-    <form action="<?php echo site_url(ADMIN_DIR . "lab/complete_test"); ?>" method="post">
-      <input type="hidden" value="<?php echo $invoice_id; ?>" name="invoice_id" />
-      <input class="btn btn-success" type="submit" value="Complete Test" name="Complete Test" />
-    </form>
+
+    <p style="text-align: right; margin-top: 90px;"><b>Eid Ullah</b><br />Chitral City Medical <br /> Laboratory Chitral</p>
+    
+      <a target="new"  href="<?php echo site_url(ADMIN_DIR."lab/print_patient_test_report/$invoice_id") ?>" class="btn btn-primary" ><i class="fa fa-print" aria-hidden="true"></i> Print Test Report</a>
   </div>
 </div>
-<script>
-  function update_test_value(patient_test_id) {
-
-
-    var partient_test_value = $('#test_' + patient_test_id + '_value').val();
-    $.ajax({
-      type: "POST",
-      url: "<?php echo site_url(ADMIN_DIR); ?>/lab/update_test_value/",
-      data: {
-        patient_test_id: patient_test_id,
-        partient_test_value: partient_test_value
-      }
-    }).done(function(data) {
-      // alert(data);
-      //console.log(data);
-      // $('#patient_test').html(data);
-    });
-  }
-  //partient_test_remark
-
-  function update_test_remarks(patient_test_id) {
-
-
-    var partient_test_remark = $('#test_' + patient_test_id + '_remark').val();
-    //alert(partient_test_remark);
-    $.ajax({
-      type: "POST",
-      url: "<?php echo site_url(ADMIN_DIR); ?>/lab/update_test_remark/",
-      data: {
-        patient_test_id: patient_test_id,
-        partient_test_remark: partient_test_remark
-      }
-    }).done(function(data) {
-      //alert(data);
-      //console.log(data);
-      // $('#patient_test').html(data);
-    });
-  }
-</script>

@@ -249,7 +249,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
               <input id="patient_group_test_ids_<?php echo $test->invoice_id; ?>" type="hidden" value="<?php echo $patient_group_test_ids; ?>" />
             <a href="#" onclick="test_token('<?php echo $test->invoice_id; ?>')">New</a> <?php  } ?>
             <?php  if($test->status==2){ ?> <a href="#" onclick="get_patient_test_form('<?php echo $test->invoice_id; ?>')">Inprogress</a> <?php  } ?>
-            <?php  if($test->status==3){ ?> <a href="#" onclick="get_patient_test_form('<?php echo $test->invoice_id; ?>')">Completed</a> <?php  } ?>
+            <?php  if($test->status==3){ ?> <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">Print</a> <?php  } ?>
            </td>
           </tr>
           <?php } ?>
@@ -338,6 +338,19 @@ function test_token(invoice_id, Patient_name, other_info){
 		     $('#test_form').modal('show'); 
         });
 		 }
+
+     function get_patient_test_report(invoice_id){
+		 
+		 $.ajax({
+         type: "POST",
+         url: "<?php echo site_url(ADMIN_DIR); ?>/lab/get_patient_test_report/",
+         data: {invoice_id:invoice_id}
+       }).done(function(data) { 
+         $('#test_form_body').html(data);
+		     $('#test_form').modal('show'); 
+        });
+		 }
+     
 
      prices  = [];
      function set_price(test_group_id, test_group_name, test_price, test_time){

@@ -144,18 +144,56 @@ class Lab extends Admin_Controller{
 		
 		}
 		
-	public function get_patient_test_form(){
-		//$this->data["view"] = ADMIN_DIR."invoices/invoices";
+	public function get_patient_test_form(){ 
+		$this->load->view(ADMIN_DIR."lab/get_patient_test_form", $this->patient_test_data());
+		}
+
+	public function get_patient_test_report(){ 
+			$this->load->view(ADMIN_DIR."lab/get_patient_test_report", $this->patient_test_data());
+			}
+	public function patient_test_data(){
 		$invoice_id = (int) $this->input->post('invoice_id');
+		$this->data["invoice_id"] = $invoice_id;
 		$where = "`invoices`.`status` IN (2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
 		$this->data["invoice_detail"]= $this->invoice_model->get_invoice_list($where, false)[0];
-		
-		$where = "`patient_tests`.`invoice_id` = '".$invoice_id."'";
-		$this->data["patient_tests"] = $this->patient_test_model->get_patient_test_list($where, false);
-		
-		
-		$this->load->view(ADMIN_DIR."lab/get_patient_test_form", $this->data);
-		}
+		//var_dump($this->data["invoice_detail"]);
+
+
+
+		$query="SELECT
+			`test_groups`.`test_group_id`,
+			`test_groups`.`test_group_name`
+			, `test_groups`.`test_time` 
+		FROM `test_groups`,
+				`patient_tests` 
+		WHERE `test_groups`.`test_group_id` = `patient_tests`.`test_group_id`
+		AND `patient_tests`.`invoice_id`=$invoice_id
+		GROUP BY `test_groups`.`test_group_name`;";
+
+		$patient_tests_groups = $this->db->query($query)->result();
+				foreach($patient_tests_groups as $patient_tests_group){
+					$where = "`patient_tests`.`invoice_id` = '".$invoice_id."'
+					          AND `patient_tests`.`test_group_id` = '".$patient_tests_group->test_group_id."' ";
+					$patient_tests_group->patient_tests = $this->patient_test_model->get_patient_test_list($where, false);
+				}
+		$this->data["patient_tests_groups"] = $patient_tests_groups;
+
+		$query="SELECT * FROM `invoices` WHERE `invoices`.`invoice_id`=$invoice_id;";
+		$invoice= $this->db->query($query)->result()[0];
+		$query="SELECT 
+					`test_groups`.`test_group_name`, 
+					`invoice_test_groups`.`price`,
+					`test_groups`.`test_price`,
+					`test_groups`.`test_time` 
+				FROM
+					`invoice_test_groups`,
+					`test_groups` 
+				WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id` 
+				AND `invoice_test_groups`.`invoice_id`=$invoice_id;";
+		$invoice->invoice_details = $this->db->query($query)->result();
+		$this->data["invoice"] = $invoice;
+		return $this->data;
+	}	
 		
 	public function update_test_value(){
 		
@@ -188,7 +226,12 @@ class Lab extends Admin_Controller{
 		$this->db->query($query);
 		redirect(ADMIN_DIR."reception/");
 		
-		}			
+		}	
+		public function print_patient_test_report($invoice_id){ 
+			$_POST['invoice_id'] = $invoice_id;
+			$this->load->view(ADMIN_DIR."lab/print_test_report", $this->patient_test_data());
+			}
+		
     
     
 }        
