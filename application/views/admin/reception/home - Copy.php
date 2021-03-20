@@ -48,13 +48,110 @@
       </ul></td></tr>
 </table>
 <hr style="margin-top: -5px;" />
-<table style="width: 100%;">
-<tr><td>Patient Name: </td><td><input type="text" name="patient_name" value="" id="patient_name" class="for m-control" style="" required="required" title="Name" placeholder="Name"></td></tr>
-<tr><td>Mobile No: </td><td><input type="text" name="patient_mobile_no" value="" id="patient_mobile_no" class="for m-control" style="" required="required" title="Mobile No" placeholder="Mobile No"></td></tr>
-<tr><td>Address: </td><td><input type="text" name="patient_address" value="" id="patient_address" class="for m-control" style="" required="required" title="Address" placeholder="Address"></td></tr>
-<tr><td>Age: </td><td><input type="number" name="patient_age" value="" id="patient_age" class="for m-control" style="" required="required" title="Patient Age" placeholder="Patient Age"></td></tr>
-<tr><td>Sex: </td><td><input type="radio" name="patient_gender" value="Male" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Male</label><input type="radio" name="patient_gender" value="Female" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Female</label></td></tr>
-<tr><td>Refered By: </td><td><select class="for m-control" required name="refered_by">
+
+       
+        <div class="form-group">
+          <?php
+                    $label = array(
+                        "class" => "col-md-4 control-label",
+                        "style" => "",
+                    ); echo form_label($this->lang->line('patient_name'), "patient_name", $label);      ?>
+          <div class="col-md-8">
+            <?php
+                    
+                    $text = array(
+                        "type"          =>  "text",
+                        "name"          =>  "patient_name",
+                        "id"            =>  "patient_name",
+                        "class"         =>  "for m-control",
+                        "style"         =>  "","required"	  => "required","title"         =>  $this->lang->line('patient_name'),
+                        "value"         =>  set_value("patient_name"),
+                        "placeholder"   =>  $this->lang->line('patient_name')
+                    );
+                    echo  form_input($text);
+                ?>
+            <?php echo form_error("patient_name", "<p class=\"text-danger\">", "</p>"); ?> </div>
+        </div>
+        <div class="form-group">
+          <?php
+                    $label = array(
+                        "class" => "col-md-4 control-label",
+                        "style" => "",
+                    ); echo form_label($this->lang->line('patient_mobile_no'), "patient_mobile_no", $label);      ?>
+          <div class="col-md-8">
+            <?php
+                    
+                    $text = array(
+                        "type"          =>  "text",
+                        "name"          =>  "patient_mobile_no",
+                        "id"            =>  "patient_mobile_no",
+                        "class"         =>  "for m-control",
+                        "style"         =>  "","required"	  => "required","title"         =>  $this->lang->line('patient_mobile_no'),
+                        "value"         =>  set_value("patient_mobile_no"),
+                        "placeholder"   =>  $this->lang->line('patient_mobile_no')
+                    );
+                    echo  form_input($text);
+                ?>
+            <?php echo form_error("patient_mobile_no", "<p class=\"text-danger\">", "</p>"); ?> </div>
+        </div>
+        <div class="form-group">
+          <?php
+                    $label = array(
+                        "class" => "col-md-4 control-label",
+                        "style" => "",
+                    ); echo form_label($this->lang->line('patient_address'), "patient_address", $label);      ?>
+          <div class="col-md-8">
+            <?php
+                    
+                    $text = array(
+                        "type"          =>  "text",
+                        "name"          =>  "patient_address",
+                        "id"            =>  "patient_address",
+                        "class"         =>  "for m-control",
+                        "style"         =>  "","required"	  => "required","title"         =>  $this->lang->line('patient_address'),
+                        "value"         =>  set_value("patient_address"),
+                        "placeholder"   =>  $this->lang->line('patient_address')
+                    );
+                    echo  form_input($text);
+                ?>
+            <?php echo form_error("patient_address", "<p class=\"text-danger\">", "</p>"); ?> </div>
+        </div>
+        <div class="form-group">
+          <?php
+                    $label = array(
+                        "class" => "col-md-4 control-label",
+                        "style" => "",
+                    );
+                    echo form_label($this->lang->line('patient_gender'), "patient_gender", $label);
+                ?>
+          <div class="col-md-8">
+            <?php 
+					$options = array("Male" => "Male", "Female" => "Female");
+                        foreach($options as $option_value => $options_name){
+                            
+                            $data = array(
+                                "name"        => "patient_gender",
+                                "id"          => "patient_gender",
+                                "value"       => $option_value,
+                                "style"       => "","required"	  => "required",
+                                "class"       => "uniform"
+                                );
+                            echo form_radio($data)."<label for=\"patient_gender\" style=\"margin-left:10px;\">$options_name</label>";
+                            
+                        }
+                    ?>
+            <?php echo form_error("patient_gender", "<p class=\"text-danger\">", "</p>"); ?> </div>
+        </div>
+        <div class="form-group">
+          <?php
+                    $label = array(
+                        "class" => "col-md-4 control-label",
+                        "style" => "",
+                    );
+                    echo form_label('Refered By', "refered_by", $label);
+                ?>
+          <div class="col-md-8">
+            <select class="for m-control" required name="refered_by">
      <option value="">Refered By</option>
 	  <?php 
 			
@@ -67,13 +164,10 @@
                         <?php }  ?>
             <?php echo form_error("refered_by", "<p class=\"text-danger\">", "</p>"); ?>
             
-            </select></td></tr>
-
-</table>
-       <hr />
-       
-            
-          
+            </select>
+            <?php echo form_error("refered_by", "<p class=\"text-danger\">", "</p>"); ?> </div>
+        </div>
+         
         
         <div>
 
@@ -90,21 +184,13 @@
         <style>
         
         table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-          padding: 5px !important;
-        }
+    padding: 5px !important;
         </style>
 
-<hr/>
-<div style="margin-bottom:10px; border:1px dashed #666666; border-radius:5px;  padding:5px; margin-bottom:5px">
-        <table style="width:100%">
-        <tr>
-        <td rowspan="3"><strong>Discount:<strong> <br />
-        <input onkeyup="update_price_list()" type="number" name="discount" value="0" id="discount" class="for m-control" style="width:80px" /></td>
-        <th>Total Price:</th><td id="test_total_price">00.00 Rs. </td></tr>
-        <tr><th>Discount: </th><td id="discount_total">00.00 Rs.</td></tr>
-        <tr><th>Payable: </th><th id="payable">00.00 Rs.</th></tr>
-        </table>
-</div>
+
+         <h4><table class="table">
+        <tr><th>Total Price</th><td id="test_total_price">00.00 Rs.</td></tr>
+        </table></h4> 
         <input type="submit" name="submit" value="Save and Print" class="btn btn-primary" style="width:100%">
         </div>
         
@@ -145,7 +231,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
   <div class="col-md-4">
     <div class="box border blue" id="messenger">
       <div class="box-title">
-        <h4><i class="fa fa-file"></i>lab Test Report Status</h4>
+        <h4><i class="fa fa-file"></i>lab Test Status</h4>
       </div>
       <div class="box-body" style="font-size: 12px !important;"> 
       
@@ -201,11 +287,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
               <input id="patient_group_test_ids_<?php echo $test->invoice_id; ?>" type="hidden" value="<?php echo $patient_group_test_ids; ?>" />
             <a href="#" onclick="test_token('<?php echo $test->invoice_id; ?>')">New</a> <?php  } ?>
             <?php  if($test->status==2){ ?> <a href="#" onclick="get_patient_test_form('<?php echo $test->invoice_id; ?>')">Inprogress</a> <?php  } ?>
-            <?php  if($test->status==3){ ?> 
-              <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">View Report</a>
-              <a style="margin-left: 10px;" target="new"  href="<?php echo site_url(ADMIN_DIR."lab/print_patient_test_report/$test->invoice_id") ?>"  ><i class="fa fa-print" aria-hidden="true"></i> Print</a>
-
-             <?php  } ?>
+            <?php  if($test->status==3){ ?> <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">Print</a> <?php  } ?>
            </td>
           </tr>
           <?php } ?>
@@ -309,19 +391,16 @@ function test_token(invoice_id, Patient_name, other_info){
      
 
      prices  = [];
-     var test_total_price = 0;
      function set_price(test_group_id, test_group_name, test_price, test_time){
 
       if($('#TG_'+test_group_id).is(':checked')){
-        test_total_price = 0;
         prices[test_group_name] = {'price' : test_price, 'test_time' : test_time };
       }else{
-        test_total_price = 0;
         delete prices[test_group_name];
       }
      // prices.forEach(element => console.log(element));
       var price_list = '<table class="table table-bordered"><tr><td>#</td><td>Test Name</td><td>Price</td></tr>';
-     
+      var test_total_price = 0;
       var count=0;
       for (var key in prices) {
         
@@ -337,30 +416,14 @@ function test_token(invoice_id, Patient_name, other_info){
 
       }
       price_list+= '</table>';
-
       $('#test_price_list').html(price_list);
       $('#test_total_price').html(test_total_price+'.00 Rs.');
-      var discount = $('#discount').val();
-      
-      $('#discount_total').html(discount+'.00 Rs.');
-      var payable = parseInt(test_total_price)-discount;
-      $('#payable').html(payable+'.00 Rs.');
-      
       //prices.forEach(test_price_list_function);
       // for (i = 0; i < prices.length; i++) {
       //     console.log(numbers[i]);
       //   } 
               
       
-     }
-
-     function update_price_list(){
-      $('#test_total_price').html(test_total_price+'.00 Rs.');
-      var discount = $('#discount').val();
-      
-      $('#discount_total').html(discount+'.00 Rs.');
-      var payable = parseInt(test_total_price)-discount;
-      $('#payable').html(payable+'.00 Rs.');
      }
 
      function test_price_list_function(test_group_name, values){

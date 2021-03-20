@@ -78,7 +78,7 @@
 
 
 
-$route['default_controller'] = "under_construction";
+$route['default_controller'] = "admin/login";
 
 $route['404_override'] = '';
 

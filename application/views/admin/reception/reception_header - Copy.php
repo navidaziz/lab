@@ -32,8 +32,54 @@
 
 </head>
 <body >
-  
+  <div class="modal" id="edit_order" data-backdrop="static" >
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+          <h4 class="modal-title" id="order_view_title"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Edit Order</h4>
+        </div>
+        <div class="modal-body" id="order_edit_form"> </div>
+        <div class="modal-footer"> <a href="#" data-dismiss="modal" class="btn btn-primary">Close</a></div>
+      </div>
+    </div>
+  </div>
+  <header class="navbar clearfix" id="header">
+    <div class="container">
+      <div class="navbar-brand">
+        <?php  $file = pathinfo($system_global_settings[0]->sytem_admin_logo);
+        $log = $file['dirname'].'/'.$file['filename'].'_thumb.'.$file['extension'];
+        ?>
+        <a href="<?php echo site_url(ADMIN_DIR.$this->session->userdata("role_homepage_uri")); ?>"> <img src="<?php echo site_url("assets/uploads/".$log); ?>" alt="<?php echo $system_global_settings[0]->system_title ?>" title="<?php echo $system_global_settings[0]->system_title ?>" class="img-responsive " style="width:40px !important;"></a>
+        <div class="visible-xs "> <a href="#" class="team-status-toggle switcher btn dropdown-toggle"> <i class="fa fa-users"></i> </a> </div>
+        <div id="sidebar-collapse" class="sidebar-collapse btn"> <i class="fa fa-bars" 
+         data-icon1="fa fa-bars" 
+         data-icon2="fa fa-bars" ></i> </div>
+       </div>
+       <ul class="nav navbar-nav pull-right" >
+        <li style="float:right"  class="dropdown user" id="header-user"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img alt="" 
+          src="<?php
+          $file = pathinfo($this->session->userdata("user_image"));
+          
+          
+          echo site_url("assets/uploads/".@$file['dirname'].'/'.@$file['filename'].'_thumb.'.@$file['extension']); ?>" /> <span class="username"><?php echo $this->session->userdata("user_title"); ?></span> <i class="fa fa-angle-down"></i> </a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo site_url(ADMIN_DIR."users/update_profile"); ?>"><i class="fa fa-user"></i> Update Profile</a></li>
+            <li><a href="<?php echo site_url(ADMIN_DIR."users/logout"); ?>"><i class="fa fa-power-off"></i> Log Out</a></li>
+          </ul>
+        </li>
+        
+        
+        
+       
+      </ul>
+    </div>
+  </header>
   <section id="page" >
+
+    <?php // $this->view(ADMIN_DIR . "components/nav.php"); ?>
+
+
     <?php if($this->session->flashdata("msg") || $this->session->flashdata("msg_error") || $this->session->flashdata("msg_success")){
               
               $type = "";
@@ -64,5 +110,5 @@
               </script>
               <?php }  ?>
               
-    <div class="container" style="padding-top:5px">
+    <div class="container" style="padding:5px">
       

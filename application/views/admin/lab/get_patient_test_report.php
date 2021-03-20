@@ -71,52 +71,7 @@
   </div>
   <div class="col-md-8">
 
-  <table class="table table-bordered" style="text-align: left;">
-      <tr>
-        <td><table class="table" style="text-align: left;">
-      <tr>
-        <th>Invoice No:</th>
-        <td><?php echo $invoice_detail->invoice_id; ?></td>
-      </tr>
-      <tr>
-        <th>Test Token No.</th>
-        <td><?php echo $invoice_detail->test_token_id; ?></td>
-      </tr>
-      <tr>
-        <th>Patient Name: </th>
-        <td><?php echo $invoice_detail->patient_name; ?></td>
-      </tr>
-      <tr>
-        <th>Gender:  <?php echo $invoice_detail->patient_gender; ?></th>
-        <th>Age:  <?php echo @$invoice_detail->patient_age; ?></th>
-      </tr>
-     
-    </table></td>
-        <td>
-        
-        <table class="table " style="text-align: left;">
-      
-      <tr>
-        <th>Mobile No:</th>
-        <td><?php echo $invoice_detail->patient_mobile_no; ?></td>
-      </tr>
-      <tr>
-        <th>Address</th>
-        <td><?php echo $invoice_detail->patient_address; ?></td>
-      </tr>
-      <tr>
-        <th>Refered By:</th>
-        <td><?php echo $invoice_detail->doctor_name . "( " . $invoice_detail->doctor_designation . " )"; ?></td>
-      </tr>
-      <tr>
-        <th>Date & Time:</th>
-        <td><?php echo date("d F, Y h:i:s", strtotime($invoice_detail->created_date)); ?></td>
-      </tr>
-    </table>
-        </td>
-      </tr>
-  </table>
-
+ 
   
 
     <?php foreach ($patient_tests_groups as $patient_tests_group) { ?>
@@ -143,8 +98,6 @@
       </table>
     <?php  } ?>
 
-    <p style="text-align: right; margin-top: 90px;"><b>Eid Ullah</b><br />Chitral City Medical <br /> Laboratory Chitral</p>
-    
       <a target="new"  href="<?php echo site_url(ADMIN_DIR."lab/print_patient_test_report/$invoice_id") ?>" class="btn btn-primary" ><i class="fa fa-print" aria-hidden="true"></i> Print Test Report</a>
   </div>
 </div>
