@@ -49,12 +49,13 @@ public function save_data($image_field= NULL){
 	$inputs = array();
             
                     $inputs["patient_name"]  =  $this->input->post("patient_name");
-                    
+                    $inputs["patient_age"]  =  $this->input->post("patient_age");
                     $inputs["patient_mobile_no"]  =  $this->input->post("patient_mobile_no");
                     
                     $inputs["patient_address"]  =  $this->input->post("patient_address");
                     
                     $inputs["patient_gender"]  =  $this->input->post("patient_gender");
+					
                     
 	return $this->patient_model->save($inputs);
 	}	 	
@@ -67,7 +68,7 @@ public function update_data($patient_id, $image_field= NULL){
                     $inputs["patient_mobile_no"]  =  $this->input->post("patient_mobile_no");
                     
                     $inputs["patient_address"]  =  $this->input->post("patient_address");
-                    
+                    $inputs["patient_age"]  =  $this->input->post("patient_age");
                     $inputs["patient_gender"]  =  $this->input->post("patient_gender");
                     
 	return $this->patient_model->save($inputs, $patient_id);

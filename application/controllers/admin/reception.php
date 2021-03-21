@@ -35,12 +35,14 @@ class Reception extends Admin_Controller{
     }
 	
 	public function save_data(){
+		
 		//save patient data and get pacient id ....
 		$patient_id = $this->patient_model->save_data();
-		//var_dump($_POST);
+		
 		$test_group_ids =  implode(',', $this->input->post('test_group_id'));
 		
 		$discount = $this->input->post("discount");
+		
 		$tax = $this->input->post("tax");
 		$refered_by = $this->input->post("refered_by");
 		
@@ -52,12 +54,14 @@ class Reception extends Admin_Controller{
 		
 		
 		$inputs = array();
+		
 		$inputs["patient_id"]  =  $patient_id;
 		$inputs["discount"]  =  $discount;
 		$inputs["price"]  =  $total_test_price;
 		$inputs["sale_tax"]  =  $tax;
 		$inputs["total_price"]  =  ($total_test_price+$tax)-$discount;
 		$inputs["patient_refer_by"]  =  $refered_by;
+		$inputs["created_by"]  =  $this->session->userdata('user_id');
 		
 		$invoice_id  = $this->invoice_model->save($inputs);						
 		
