@@ -33,9 +33,10 @@ class Tests extends Admin_Controller{
     public function view(){
 		
         $where = "`tests`.`status` IN (0, 1) ORDER BY `tests`.`order`";
-		$data = $this->test_model->get_test_list($where);
-		 $this->data["tests"] = $data->tests;
-		 $this->data["pagination"] = $data->pagination;
+		$this->data["tests"] = $this->test_model->get_test_list($where, false);
+		 //$this->data["tests"] = $data->tests;
+		 //$this->data["pagination"] = $data->pagination;
+         $this->data["pagination"] = false;
 		 $this->data["title"] = $this->lang->line('Tests');
 		$this->data["view"] = ADMIN_DIR."tests/tests";
 		$this->load->view(ADMIN_DIR."layout", $this->data);

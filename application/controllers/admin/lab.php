@@ -154,7 +154,7 @@ class Lab extends Admin_Controller{
 	public function patient_test_data(){
 		$invoice_id = (int) $this->input->post('invoice_id');
 		$this->data["invoice_id"] = $invoice_id;
-		$where = "`invoices`.`status` IN (2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
+		$where = "`invoices`.`status` IN (1,2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
 		$this->data["invoice_detail"]= $this->invoice_model->get_invoice_list($where, false)[0];
 		//var_dump($this->data["invoice_detail"]);
 

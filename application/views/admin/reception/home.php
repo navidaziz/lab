@@ -236,7 +236,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
         <form action="<?php echo site_url(ADMIN_DIR.'reception/save_and_process') ?>" method="post">
           <input type="hidden" value="" name="invoice_id" id="invoiceid" />
           <input type="hidden" value="" name="patient_group_test_ids" id="patientgrouptestids" />
-          <input required="required" placeholder="Enter test token ID" type="text" name="test_token_id" value="" />
+          <input required="required" placeholder="Enter test token ID" type="hidden" name="test_token_id" value="<?php echo time(); ?>" />
           <input type="submit" value="Save and Process" name="save_and_process" />
         </form>
       </div>

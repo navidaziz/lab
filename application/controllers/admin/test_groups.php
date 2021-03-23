@@ -10,7 +10,10 @@ class Test_groups extends Admin_Controller{
         parent::__construct();
         $this->load->model("admin/test_group_model");
 		$this->load->model("admin/test_type_model");
-		
+        
+        $this->load->model("admin/test_model");
+        $this->lang->load("tests", 'english');
+		$this->lang->load("system", 'english');
 		$this->load->model("admin/test_group_test_model");
 		$this->lang->load("test_group_tests", 'english');
 		$this->lang->load("test_groups", 'english');
@@ -64,23 +67,45 @@ class Test_groups extends Admin_Controller{
 				$group_test_ids.=' ,'.$group_test->test_id;
 				}
 		
+                $this->data["test_categories"] = $this->test_model->getList("test_categories", "test_category_id", "test_category", $where ="`test_categories`.`status` IN (1) LIMIT 1 ");
+    
+                $this->data["test_types_list"] = $this->test_model->getList("test_types", "test_type_id", "test_type", $where ="`test_types`.`status` IN (1) ");
+                
 		
 		
-		
-		$where = "`test_group_tests`.`test_group_id` ='".$test_group_id."' ORDER BY `test_group_tests`.`order`";
-		$this->data["test_group_tests"] = $this->test_group_test_model->get_test_group_test_list($where, false);
-		
-		
+		//$where = "`test_group_tests`.`test_group_id` ='".$test_group_id."' ORDER BY `test_group_tests`.`order`";
+		//$this->data["test_group_tests"] = $this->test_group_test_model->get_test_group_test_list($where, false);
+
+       
+
+        $query="SELECT
+                    `test_group_tests`.`test_group_id`
+                    , `test_group_tests`.`test_id`
+                    , `tests`.`test_name`
+                    , `tests`.`test_time`
+                    , `tests`.`test_price`
+                    , `tests`.`test_description`
+                    , `tests`.`normal_values`
+                    , `test_group_tests`.`test_group_test_id`
+                    , `test_types`.`test_type` 
+                FROM
+                `tests`, `test_group_tests`, `test_types`  
+                WHERE `tests`.`test_id` = `test_group_tests`.`test_id`
+                AND `test_group_tests`.`test_group_id` ='".$test_group_id."' 
+                AND `test_types`.`test_type_id` = `tests`.`test_type_id` 
+                ORDER BY `test_group_tests`.`order`
+                ";
+
+        $this->data["test_group_tests"] = $this->db->query($query)->result();
+
+
 		$where = "`test_types`.`status` IN (1)  ORDER BY `test_types`.`order`";
 		  $test_types = $this->test_type_model->get_test_type_list($where, false);
 		  foreach($test_types as $test_type){
 			 $test_type->tests =  $this->test_group_test_model->getList("tests", "test_id", "test_name", $where ="`tests`.`status` IN (1) AND `test_type_id`='".$test_type->test_type_id."' AND `test_id` NOT IN (".$group_test_ids.")");
 			  }
-		 
-		 
-		 
-		
-    $this->data["test_types"] =  $test_types;
+        $this->data["test_types"] =  $test_types;
+        
 		
 		 
         $this->data["test_groups"] = $this->test_group_model->get_test_group($test_group_id);
@@ -463,5 +488,23 @@ class Test_groups extends Admin_Controller{
      }
 		
     //-----------------------------------------------------
+
+    public function save_test_data($test_group_id){
+        $test_group_id = (int) $test_group_id;
+        if($this->test_model->validate_form_data() === TRUE){
+		  
+            $test_id = $this->test_model->save_data();
+            if($test_id){
+                  $this->session->set_flashdata("msg_success", $this->lang->line("add_msg_success"));
+                  redirect(ADMIN_DIR."test_groups/view_test_group/".$test_group_id);
+              }else{
+                  
+                  $this->session->set_flashdata("msg_error", $this->lang->line("msg_error"));
+                  redirect(ADMIN_DIR."test_groups/view_test_group/".$test_group_id);
+              }
+          }else{
+                 redirect(ADMIN_DIR."test_groups/view_test_group/".$test_group_id);
+              }
+    }
     
 }        

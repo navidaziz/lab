@@ -70,8 +70,8 @@
 						  <tr>
                           
 							<th><?php echo $this->lang->line('test_name'); ?></th>
-<th><?php echo $this->lang->line('test_time'); ?></th>
-<th><?php echo $this->lang->line('test_price'); ?></th>
+<!-- <th><?php echo $this->lang->line('test_time'); ?></th>
+<th><?php echo $this->lang->line('test_price'); ?></th> -->
 <th><?php echo $this->lang->line('test_description'); ?></th>
 <th><?php echo $this->lang->line('normal_values'); ?></th>
 <th><?php echo $this->lang->line('test_category'); ?></th>
@@ -87,14 +87,14 @@
             <td>
                 <?php echo $test->test_name; ?>
             </td>
-            <td>
+            <!-- <td>
                 <?php echo $test->test_time; ?>
             </td>
             <td>
                 <?php echo $test->test_price; ?>
-            </td>
+            </td> -->
             <td>
-                <?php echo $test->test_description; ?>
+                <?php echo substr($test->test_description, 0,  20); ?>
             </td>
             <td>
                 <?php echo $test->normal_values; ?>

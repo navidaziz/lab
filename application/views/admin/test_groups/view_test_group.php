@@ -25,9 +25,11 @@
                         
                 <div class="col-md-6">
                     <div class="clearfix">
-					  <h3 class="content-title pull-left"><?php echo $title; ?></h3>
+					  <h3 class="content-title pull-left"><?php echo $test_groups[0]->test_group_name; ?></h3>
 					</div>
-					<div class="description"><?php echo $title; ?></div>
+					<div class="description">
+                    Time <?php echo $test_groups[0]->test_time; ?> - Price <?php echo $test_groups[0]->test_price; ?> Rs
+                    </div>
                 </div>
                 
                 <div class="col-md-6">
@@ -47,103 +49,13 @@
 
 <!-- PAGE MAIN CONTENT -->
 <div class="row">
-		<!-- MESSENGER -->
-	<div class="col-md-3">
-	<div class="box border blue" id="messenger">
-		<div class="box-title">
-			<h4><i class="fa fa-bell"></i> <?php echo $title; ?></h4>
-			<!--<div class="tools">
-            
-				<a href="#box-config" data-toggle="modal" class="config">
-					<i class="fa fa-cog"></i>
-				</a>
-				<a href="javascript:;" class="reload">
-					<i class="fa fa-refresh"></i>
-				</a>
-				<a href="javascript:;" class="collapse">
-					<i class="fa fa-chevron-up"></i>
-				</a>
-				<a href="javascript:;" class="remove">
-					<i class="fa fa-times"></i>
-				</a>
-				
-
-			</div>-->
-		</div><div class="box-body">
-			
-            <div class="table-responsive">
-                
-                    <table class="table">
-						<thead>
-						  
-						</thead>
-						<tbody>
-					  <?php foreach($test_groups as $test_group): ?>
-                         
-                         
-            <tr>
-                <th><?php echo $this->lang->line('test_group_name'); ?></th>
-                <td>
-                    <?php echo $test_group->test_group_name; ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $this->lang->line('test_price'); ?></th>
-                <td>
-                    <?php echo $test_group->test_price; ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $this->lang->line('test_time'); ?></th>
-                <td>
-                    <?php echo $test_group->test_time; ?>
-                </td>
-            </tr>
-                            <tr>
-                                <th><?php echo $this->lang->line('Status'); ?></th>
-                                <td>
-                                    <?php echo status($test_group->status); ?>
-                                </td>
-                            </tr>
-                         
-                      <?php endforeach; ?>
-						</tbody>
-					  </table>
-                      
-                      
-                      
-
-            </div>
-			
-			
-		</div>
-		
-	</div>
-	</div>
+	
     
-    
-    
-    <div class="col-md-6">
+    <div class="col-md-8">
 	<div class="box border blue" id="messenger">
 		<div class="box-title">
 			<h4><i class="fa fa-bell"></i> Group Tests List</h4>
-			<!--<div class="tools">
-            
-				<a href="#box-config" data-toggle="modal" class="config">
-					<i class="fa fa-cog"></i>
-				</a>
-				<a href="javascript:;" class="reload">
-					<i class="fa fa-refresh"></i>
-				</a>
-				<a href="javascript:;" class="collapse">
-					<i class="fa fa-chevron-up"></i>
-				</a>
-				<a href="javascript:;" class="remove">
-					<i class="fa fa-times"></i>
-				</a>
-				
-
-			</div>-->
+			
 		</div><div class="box-body">
 			
             <div class="table-responsive">
@@ -153,8 +65,11 @@
                         
 						  <tr>
                         <th>#</th>  
-							
-<th><?php echo $this->lang->line('test_name'); ?></th><th><?php echo $this->lang->line('Order'); ?></th><th><?php echo $this->lang->line('Action'); ?></th>
+                        <th><?php echo $this->lang->line('test_name'); ?></th>
+                        <th>Normal Value</th>
+                        <th>Test Type</th>
+                        <th><?php echo $this->lang->line('Order'); ?></th>
+                        <th><?php echo $this->lang->line('Action'); ?></th>
                         </tr>
 						</thead>
 						<tbody>
@@ -163,19 +78,17 @@
 					  foreach($test_group_tests as $test_group_test): ?>
                          
                          <tr>
-                         
-                             
-            <td><?php echo $count++; ?></td>
-            <td>
-                <?php echo $test_group_test->test_name; ?>
-            </td>
-                                <td>
-                                  <a class="llink llink-orderup" href="<?php echo site_url(ADMIN_DIR."test_groups/up_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-arrow-up"></i> </a>
-                                  <a class="llink llink-orderdown" href="<?php echo site_url(ADMIN_DIR."test_groups/down_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-arrow-down"></i></a>
-                                </td><td>
-                                
-                                <a class="llink llink-trash" href="<?php echo site_url(ADMIN_DIR."test_groups/delete_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-trash-o"></i></a>
-                            </td>
+                         <td><?php echo $count++; ?></td>
+                         <td> <?php echo $test_group_test->test_name; ?> </td>
+                         <td>  <?php echo $test_group_test->normal_values; ?> </td>
+                         <td><?php echo $test_group_test->test_type; ?></td>
+                         <td> 
+                         <a class="llink llink-orderup" href="<?php echo site_url(ADMIN_DIR."test_groups/up_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-arrow-up"></i> </a>
+                         <a class="llink llink-orderdown" href="<?php echo site_url(ADMIN_DIR."test_groups/down_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-arrow-down"></i></a>
+                         </td>
+                         <td>
+                         <a class="llink llink-trash" href="<?php echo site_url(ADMIN_DIR."test_groups/delete_test/".$test_group_test->test_group_test_id."/".$test_groups[0]->test_group_id); ?>"><i class="fa fa-trash-o"></i></a>
+                         </td>
                          </tr>
                       <?php endforeach; ?>
 						</tbody>
@@ -194,10 +107,55 @@
     
     
     
-    <div class="col-md-3">
+    <div class="col-md-4">
+    <div class="box border blue" id="add_test_form" style="display: none;">
+		<div class="box-title">
+			<h4><i class="fa fa-plus"></i> Add New Test</h4>
+		</div>
+    <div class="box-body">
+<?php
+    $add_form_attr = array("class" => "form-horizontal");
+    echo form_open_multipart(ADMIN_DIR."test_groups/save_test_data/".$test_groups[0]->test_group_id, $add_form_attr);
+?>
+<table class="table">
+<tr>
+<th><?php echo $this->lang->line('test_category') ?></th>
+<th><?php echo form_dropdown("test_category_id", $test_categories, "", "class=\"form-c ontrol\" required style=\"\"");?></th>
+</tr>
+<tr>
+<th><?php echo $this->lang->line('test_type') ?></th>
+<th><?php  echo form_dropdown("test_type_id", $test_types_list, "", "class=\"form-co ntrol\" required style=\"\""); ?></th>
+</tr>
+<tr>
+<th><?php echo $this->lang->line('test_name') ?></th>
+<th><input type="text" name="test_name" value="" id="test_name" class="form-con trol" style="" required="required" title="Test Name" placeholder="Test Name"></th>
+</tr>
+
+<tr>
+<th><?php echo $this->lang->line('normal_values') ?></th>
+<th><input type="text" name="normal_values" value="" id="normal_values" class="form-co ntrol" style="" title="Normal Values" placeholder="Normal Values"></th>
+</tr>
+<tr>
+<th>Add Test</th>
+<th><input type="submit" name="submit" value="Save" class="b tn bt n-primary" style=""></th>
+</tr>
+</table>
+<?php echo form_close(); ?>
+
+
+
+
+
+
+</div>
+</div>
+
+
+
 	<div class="box border blue" id="messenger">
 		<div class="box-title">
-			<h4><i class="fa fa-bell"></i> Add New Test</h4>
+			<h4><i class="fa fa-bell"></i>Select Test for test group</h4>
+            <button class="btn btn-daanger btn-sm" onclick="$('#add_test_form').toggle()"  ><i class="fa fa-plus"></i> Add Test</button>
 		</div>
         <div class="box-body">
 
@@ -210,7 +168,7 @@
                
 
                 <div class="col-md-12">
-                   <select name="test_id[]"  class="form-control js-example-basic-multiple" multiple="" required="" >
+                   <select style="height: 350px;" name="test_id[]"  class="form-control js-example-basic-multiple" multiple="" required="" >
                 <?php foreach($test_types as $test_type){ ?>
                 <optgroup label = "<?php echo $test_type->test_type;  ?>">
                 	<?php foreach($test_type->tests as $test_id => $test_name){ ?>
@@ -263,9 +221,9 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-});
+//$(document).ready(function() {
+   // $('.js-example-basic-multiple').select2();
+//});
 </script>
 
 

@@ -32,17 +32,18 @@ class Test_model extends MY_Model{
                             "rules"  =>  "required"
                         ),
                         
-                        array(
-                            "field"  =>  "test_time",
-                            "label"  =>  "Test Time",
-                            "rules"  =>  "required"
-                        ),
+                        // array(
+                        //     "field"  =>  "test_time",
+                        //     "label"  =>  "Test Time",
+                        //     "rules"  =>  "required"
+                        // ),
                         
-                        array(
-                            "field"  =>  "test_price",
-                            "label"  =>  "Test Price",
-                            "rules"  =>  "required"
-                        ),
+                        // array(
+                        //     "field"  =>  "test_price",
+                        //     "label"  =>  "Test Price",
+                        //     "rules"  =>  "required"
+                        // ),
+                        
                         
             );
 	 //set and run the validation
