@@ -76,6 +76,12 @@ page[size="A5"][layout="landscape"] {
     box-shadow: 0;
   }
 }
+
+        
+        table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+          padding: 2px !important;
+        }
+       
 </style>
 </head>
 <body  >
@@ -135,7 +141,7 @@ page[size="A5"][layout="landscape"] {
   
 
     <?php foreach ($patient_tests_groups as $patient_tests_group) { ?>
-      <h3><?php echo $patient_tests_group->test_group_name; ?></h3>
+      <h5><strong><?php echo $patient_tests_group->test_group_name; ?></strong></h5>
       <table class="table table-bordered" style="text-align: left;">
         <tr>
           <th>#</th>
@@ -160,9 +166,7 @@ page[size="A5"][layout="landscape"] {
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
+
     <p style="text-align: right;"><b>Eid Ullah</b><br />Chitral City Medical <br /> Laboratory Chitral</p>
 </div>
 
