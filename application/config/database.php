@@ -104,7 +104,7 @@ $db['default']['username'] = 'root';
 
 $db['default']['password'] = '';
 
-$db['default']['database'] = 'lab';
+$db['default']['database'] = 'alkhidmat';
 
 $db['default']['dbdriver'] = 'mysqli';
 

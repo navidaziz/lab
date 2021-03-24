@@ -11,7 +11,7 @@
             $cn_class = "active";
         }
         
-		if(count($controller_data['actions'])>1){
+		if(@count($controller_data['actions'])>1){
 		
         $menu_list .= "<li class='has-sub ".$cn_class."'>
 				<a href='javascript:;' class=''>
