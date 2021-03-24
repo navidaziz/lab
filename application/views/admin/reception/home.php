@@ -1,4 +1,5 @@
 <?php $this->load->view(ADMIN_DIR."reception/reception_header"); ?>
+
  <?php
                 $add_form_attr = array("class" => "form-horizontal");
                 echo form_open_multipart(ADMIN_DIR."reception/save_data", $add_form_attr);

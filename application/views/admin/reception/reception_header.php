@@ -32,6 +32,14 @@
 
 </head>
 <body >
+
+
+<section id="page" >
+<?php $this->load->view(ADMIN_DIR."components/nav.php"); ?>
+<div id="main-content"  class="margin-left-50"  >
+<div class="container">
+<div class="row">
+<div id="content" class="col-lg-12" style="padding: 0px !important; margin:0px !important;">
   
   <section id="page" >
     <?php if($this->session->flashdata("msg") || $this->session->flashdata("msg_error") || $this->session->flashdata("msg_success")){

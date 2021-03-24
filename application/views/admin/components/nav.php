@@ -3,7 +3,7 @@
 
 
 
-    $menu_list = "<ul>";
+    $menu_list = '<ul style="margin-top:0px !important">';
     foreach($menu_arr as $controller_id => $controller_data){
         
         $cn_class = "";
@@ -75,7 +75,7 @@
 
 <div id="sidebar"  
 
-<?php if($this->router->fetch_class()=='orders' or $this->router->fetch_class()=='riders'){ ?> class="sidebar mini-menu" <?php }else{ ?>class="sidebar" <?php } ?> >
+<?php if($this->router->fetch_class()=='orders' or $this->router->fetch_class()=='reception'){ ?> class="sidebar mini-menu" <?php }else{ ?>class="sidebar" <?php } ?> >
 
  <?php if($this->session->userdata('role_id')==14){
 	 
@@ -109,28 +109,8 @@ AND  `groups`.`group_id` = ".$this->session->userdata('group_id');
 
 	<div class="sidebar-menu nav-collapse" >
     
-    <h4  style="text-align:center; color:red">Beta Version</h4>
-    
-    
-    
-		<!--<div class="divide-20"></div>-->
-		<!-- SEARCH BAR -->
-		<!--<div id="search-bar">
-        <form action="<?php echo base_url(ADMIN_DIR."complaints/search"); ?>" method="post">
-			<input class="search" type="text"  name="complaint_code" placeholder="Complaint Code"
-			<?php //if($this->router->fetch_class()=='dashboard'){ ?>  <?php //}else{ ?>  <?php //} ?> >
-            <button type="submit" class="fa fa-search search-icon" style="background:none !important; border:none !important;"></button>
-            </form>
-		</div>-->
-		<!-- /SEARCH BAR -->
-		
-		<!-- SIDEBAR QUICK-LAUNCH -->
-		<!-- <div id="quicklaunch">
-		<!-- /SIDEBAR QUICK-LAUNCH -->
-		
-		<!-- SIDEBAR MENU -->
 		<?php echo $menu_list; ?>
-		<!-- /SIDEBAR MENU -->
+		
 	</div>
 </div>
 <!-- /SIDEBAR -->
