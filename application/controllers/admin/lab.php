@@ -220,8 +220,10 @@ class Lab extends Admin_Controller{
 		
 	public function complete_test(){
 		$invoice_id = (int) $this->input->post("invoice_id");
+		$remarks = $this->db->escape($this->input->post("test_remarks"));
 		$query="UPDATE `invoices` 
 				SET `status`='3'
+				, `remarks`= $remarks
 			    WHERE `invoice_id` = '".$invoice_id."'";
 		$this->db->query($query);
 		redirect(ADMIN_DIR."reception/");

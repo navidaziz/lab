@@ -164,6 +164,9 @@ page[size="A5"][layout="landscape"] {
       </table>
     <?php  } ?>
 <br />
+<div style="text-align: left;"><strong>Remarks:</strong>
+    <p style="border: 1px dashed #ddd; border-radius: 5px; padding: 5px; min-height: 50px;"><?php echo $invoice_detail->remarks; ?></p>
+    </div>
 <br />
 <br />
 

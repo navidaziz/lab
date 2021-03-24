@@ -94,7 +94,11 @@
         <?php } ?>
       </table>
     <?php  } ?>
+   
+    
     <form action="<?php echo site_url(ADMIN_DIR . "lab/complete_test"); ?>" method="post">
+    <div style="text-align: left;"><strong>Remarks:</strong>
+    <textarea name="test_remarks" id="test_remarks" class="form-control" style="margin-bottom: 5px;" ></textarea></div>
       <input type="hidden" value="<?php echo $invoice_id; ?>" name="invoice_id" />
       <input class="btn btn-success" type="submit" value="Complete Test" name="Complete Test" />
     </form>
