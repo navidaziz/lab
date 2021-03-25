@@ -1,15 +1,12 @@
 .navbar {
-    background: none repeat scroll 0 0 #18a4d3 !important;
+    background: none repeat scroll 0 0 #16A2D2 !important;
 }
 
 .box.border.blue .box-title {
     color: #fff!important;
-    background-color: #18a4d3!important;
-    border-bottom: 1px solid #18a4d3!;
-}
-
-.box.border.blue {
-    border: 1px solid #1493bd !important;
+    background-color: #16A2D2!important;
+    background-color: #16A2D2 !important;
+    border-bottom: 1px solid #91b1e5;
 }
 
 #toast {
