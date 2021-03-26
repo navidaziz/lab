@@ -156,10 +156,7 @@ class Lab extends Admin_Controller{
 		$this->data["invoice_id"] = $invoice_id;
 		$where = "`invoices`.`status` IN (1,2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
 		$this->data["invoice_detail"]= $this->invoice_model->get_invoice_list($where, false)[0];
-		//var_dump($this->data["invoice_detail"]);
-
-
-
+		
 		$query="SELECT
 			`test_groups`.`test_group_id`,
 			`test_groups`.`test_group_name`

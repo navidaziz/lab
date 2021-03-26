@@ -100,6 +100,7 @@ public function update_data($invoice_id, $image_field= NULL){
                 , "patients.patient_name"
 				, "patients.patient_mobile_no"
 				, "patients.patient_gender"
+				, "patients.patient_age"
 				, "patients.patient_address"
                 , "doctors.doctor_name"
 				, "doctors.doctor_designation"
@@ -142,6 +143,7 @@ public function get_invoice($invoice_id){
 				, "patients.patient_mobile_no"
 				, "patients.patient_gender"
 				, "patients.patient_address"
+				, "patients.patient_age"
                 , "doctors.doctor_name"
 				, "doctors.doctor_designation"
             );

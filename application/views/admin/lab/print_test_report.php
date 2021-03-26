@@ -87,8 +87,8 @@ page[size="A5"][layout="landscape"] {
 </head>
 <body  >
 <page size='A4'>
-<div style="padding: 50px;">
-<table  style="text-align: left; margin-top: 120px; width:100%">
+<div style="padding: 40px;">
+<table  style="text-align: left; margin-top: 100px; width:100%">
       <tr>
         <td><table class="table" style="text-align: left;">
       
@@ -98,7 +98,7 @@ page[size="A5"][layout="landscape"] {
       </tr>
       <tr>
         <th>Gender:  <?php echo $invoice_detail->patient_gender; ?></th>
-        <th>Age:  <?php echo @$invoice_detail->patient_age; ?></th>
+        <th>Age:  <?php echo @$invoice_detail->patient_age; ?> Y</th>
       </tr>
       <tr>
         <th>Mobile No:</th>
