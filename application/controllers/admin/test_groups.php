@@ -83,6 +83,7 @@ class Test_groups extends Admin_Controller{
                     , `test_group_tests`.`test_id`
                     , `tests`.`test_name`
                     , `tests`.`test_time`
+                    , `tests`.`unit`
                     , `tests`.`test_price`
                     , `tests`.`test_description`
                     , `tests`.`normal_values`

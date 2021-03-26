@@ -66,6 +66,7 @@
 						  <tr>
                         <th>#</th>  
                         <th><?php echo $this->lang->line('test_name'); ?></th>
+                        <th>Unit</th>
                         <th>Normal Value</th>
                         <th>Test Type</th>
                         <th><?php echo $this->lang->line('Order'); ?></th>
@@ -80,6 +81,9 @@
                          <tr>
                          <td><?php echo $count++; ?></td>
                          <td> <?php echo $test_group_test->test_name; ?> </td>
+                         <td>  
+                         <input type="text" value="<?php echo $test_group_test->unit; ?>" name="test_unit" id="test_unit" />
+                         </td>
                          <td>  <?php echo $test_group_test->normal_values; ?> </td>
                          <td><?php echo $test_group_test->test_type; ?></td>
                          <td> 
