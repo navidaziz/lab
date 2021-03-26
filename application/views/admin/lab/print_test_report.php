@@ -160,8 +160,10 @@ page[size="A5"][layout="landscape"] {
           <th>Test Name</th>
           
           <th>Test Result</th>
-          <th>Unit</th>
-          <?php if($normal_value){ ?><th>Normal Value</th> <?php }  ?>
+          
+          <?php if($normal_value){ ?>
+            <th>Unit</th>
+            <th>Normal Value</th> <?php }  ?>
           
           <!-- <th>Remarks</th> -->
         </tr>
@@ -171,8 +173,10 @@ page[size="A5"][layout="landscape"] {
             <th><?php echo $patient_test->test_name; ?></th>
             
             <th> <?php echo $patient_test->test_result; ?> </th>
-            <th> <?php echo $patient_test->unit; ?> </th>
-            <?php if($normal_value){ ?> <th><?php echo $patient_test->test_normal_value; ?></th><?php }  ?>
+            
+            <?php if($normal_value){ ?> 
+              <th> <?php echo $patient_test->unit; ?> </th>
+              <th><?php echo $patient_test->test_normal_value; ?></th><?php }  ?>
             <!-- <td><?php echo $patient_test->remarks; ?> </td> -->
           </tr>
 		  <?php } ?>
