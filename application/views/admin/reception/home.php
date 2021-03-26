@@ -201,7 +201,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
               <input id="in_<?php echo $test->invoice_id; ?>" type="hidden" value="<?php echo $other_info; ?>" />
               <input id="patient_group_test_ids_<?php echo $test->invoice_id; ?>" type="hidden" value="<?php echo $patient_group_test_ids; ?>" />
             <a href="#" onclick="test_token('<?php echo $test->invoice_id; ?>')">New</a> <?php  } ?>
-            <?php  if($test->status==2){ ?> <a href="#" onclick="get_patient_test_form('<?php echo $test->invoice_id; ?>')">Inprogress</a> <?php  } ?>
+            <?php  if($test->status==2){ ?> <a href="#" onclick="get_patient_test_form('<?php echo $test->invoice_id; ?>')">Add Result</a> <?php  } ?>
             <?php  if($test->status==3){ ?> 
               <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">View Report</a>
               <a style="margin-left: 10px;" target="new"  href="<?php echo site_url(ADMIN_DIR."lab/print_patient_test_report/$test->invoice_id") ?>"  ><i class="fa fa-print" aria-hidden="true"></i> Print</a>
