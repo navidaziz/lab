@@ -507,5 +507,14 @@ class Test_groups extends Admin_Controller{
                  redirect(ADMIN_DIR."test_groups/view_test_group/".$test_group_id);
               }
     }
+
+    public function add_test_unit(){
+        $test_unit = $this->db->escape($this->input->post('test_unit'));
+        $test_id = (int) $this->input->post('test_id');
+        $this->db->query("UPDATE `tests` 
+                          SET `unit` = ".$test_unit." 
+                          WHERE `tests`.`test_id` = '".$test_id."';");
+
+    }
     
 }        

@@ -82,7 +82,7 @@
                          <td><?php echo $count++; ?></td>
                          <td> <?php echo $test_group_test->test_name; ?> </td>
                          <td>  
-                         <input type="text" value="<?php echo $test_group_test->unit; ?>" name="test_unit" id="test_unit" />
+                         <input onkeyup="add_test_unit('<?php echo $test_group_test->test_id; ?>')" type="text" value="<?php echo $test_group_test->unit; ?>" name="test_unit" id="test_unit_<?php echo $test_group_test->test_id; ?>" />
                          </td>
                          <td>  <?php echo $test_group_test->normal_values; ?> </td>
                          <td><?php echo $test_group_test->test_type; ?></td>
@@ -225,9 +225,19 @@
 </div>
 
 <script>
-//$(document).ready(function() {
-   // $('.js-example-basic-multiple').select2();
-//});
+function add_test_unit(test_id){
+test_unit = $('#test_unit_'+test_id).val();
+$.ajax({
+				type: "POST",
+				url: '<?php echo site_url(ADMIN_DIR . "test_groups/add_test_unit"); ?>',
+				data: {
+					test_unit: test_unit,
+                    test_id, test_id
+				}
+			}).done(function(data) {
+				//$('#edit_student_info_body').html(data);
+			});
+}
 </script>
 
 

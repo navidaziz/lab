@@ -88,7 +88,7 @@ public function update_data($patient_test_id, $image_field= NULL){
 		$data = (object) array();
 		$fields = array("patient_tests.*"
                 , "tests.test_name"
-            
+                , "tests.unit"
                 , "invoices.invoice_id"
             );
 		$join_table = array(
@@ -126,7 +126,7 @@ public function get_patient_test($patient_test_id){
 	
 		$fields = array("patient_tests.*"
                 , "tests.test_name"
-            
+                , "tests.unit"
                 , "invoices.invoice_id"
             );
 		$join_table = array(
