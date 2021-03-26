@@ -128,7 +128,7 @@
 -moz-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);
 box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
 		<input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" />
-    <strong style="margin-left:2px;"><?php echo substr($test_group->test_group_name,0,12); ?></strong>
+    <strong style="margin-left:2px;"><?php echo substr($test_group->test_group_name,0,20); ?></strong>
         <span style="font-size:9px; display:block; margin-left:30px !important"> Rs: <?php echo $test_group->test_price; ?> - 
         <?php echo $test_group->test_time; ?>min</span>
         </div>
