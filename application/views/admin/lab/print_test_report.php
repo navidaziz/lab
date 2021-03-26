@@ -13,12 +13,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/css/cloud-admin.css" media='screen,print' />
-  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/themes/default.css" media='screen,print' id="skin-switcher" />
-  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/responsive.css" media='screen,print' />
-  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/jstree-dist/themes/default/style.min.css" />
-  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/custom.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo site_url("assets/".ADMIN_DIR); ?>/css/cloud-admin.css" media="screen,print" />
+  <link rel="stylesheet" type="text/css"  href="<?php echo site_url("assets/".ADMIN_DIR); ?>/css/themes/default.css" media="screen,print" id="skin-switcher" />
+  <link rel="stylesheet" type="text/css"  href="<?php echo site_url("assets/".ADMIN_DIR); ?>/css/responsive.css" media="screen,print" />
+  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/jstree-dist/themes/default/style.min.css" media="screen,print" />
+  <link rel="stylesheet" type="text/css"  href="<?php echo site_url("assets/".ADMIN_DIR); ?>/css/custom.css" media="screen,print" />
   
+
 <style>
 body {
   background: rgb(204,204,204); 
