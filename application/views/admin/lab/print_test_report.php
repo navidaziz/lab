@@ -153,6 +153,7 @@ page[size="A5"][layout="landscape"] {
         <?php
         $count = 1;
         foreach ($patient_tests_group->patient_tests as $patient_test) { ?>
+		<?php if($patient_test->test_result!=''){ ?>
           <tr>
             <td><?php echo $count++; ?></td>
             <td><?php echo $patient_test->test_name; ?></td>
@@ -160,6 +161,7 @@ page[size="A5"][layout="landscape"] {
             <td><?php echo $patient_test->test_normal_value; ?></td>
             <td><?php echo $patient_test->remarks; ?> </td>
           </tr>
+		  <?php } ?>
         <?php } ?>
       </table>
     <?php  } ?>
