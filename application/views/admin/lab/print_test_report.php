@@ -60,6 +60,10 @@ page[size="A5"][layout="landscape"] {
     margin: 0;
     box-shadow: 0;
   }
+  table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+          padding: 2px !important;
+		  font-size: 14px !important;
+        }
 }
 
         
@@ -127,25 +131,39 @@ page[size="A5"][layout="landscape"] {
   
 
     <?php foreach ($patient_tests_groups as $patient_tests_group) { ?>
-      <h5><strong><?php echo $patient_tests_group->test_group_name; ?></strong></h5>
+      <h5><strong><?php echo $patient_tests_group->test_group_name; ?><?php echo $patient_tests_group->test_group_id; ?></strong></h5>
       <table class="table table-bordered" style="text-align: left;">
-        <tr>
-          <th>#</th>
-          <th>Test Name</th>
-          <th>Test Result</th>
-          <th>Normal Value</th>
-          <th>Remarks</th>
-        </tr>
+       
         <?php
+
+        $normal_value=true;
+        foreach ($patient_tests_group->patient_tests as $patient_test) {
+          if($patient_test->test_normal_value!=""){
+            $normal_value=true;
+          }else{
+            $normal_value=false;
+          }
+        }
+
         $count = 1;
         foreach ($patient_tests_group->patient_tests as $patient_test) { ?>
 		<?php if($patient_test->test_result!=''){ ?>
+<?php if($count==1){ ?>
+      <tr>
+          <th>#</th>
+          <th>Test Name</th>
+          <th>Test Result</th>
+          <?php if($normal_value){ ?><th>Normal Value</th> <?php }  ?>
+          
+          <!-- <th>Remarks</th> -->
+        </tr>
+<?php } ?>
           <tr>
             <td><?php echo $count++; ?></td>
             <td><?php echo $patient_test->test_name; ?></td>
             <td> <?php echo $patient_test->test_result; ?> </td>
-            <td><?php echo $patient_test->test_normal_value; ?></td>
-            <td><?php echo $patient_test->remarks; ?> </td>
+            <?php if($normal_value){ ?> <td><?php echo $patient_test->test_normal_value; ?></td><?php }  ?>
+            <!-- <td><?php echo $patient_test->remarks; ?> </td> -->
           </tr>
 		  <?php } ?>
         <?php } ?>
