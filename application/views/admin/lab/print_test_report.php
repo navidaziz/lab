@@ -13,27 +13,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/js/magic-suggest/magicsuggest-1.3.1-min.css" />
   <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/css/cloud-admin.css" media='screen,print' />
   <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/themes/default.css" media='screen,print' id="skin-switcher" />
   <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/responsive.css" media='screen,print' />
-  <script> var site_url='http://localhost/lab/admin';</script>
-  <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
-  <script src="http://localhost/lab/assets/admin/js/jquery/jquery-2.0.3.min.js"></script>
-  <script  src="http://localhost/lab/assets/admin/bootstrap-dist/js/bootstrap.min.js"></script>
-  <!-- jstree resources -->
-  <script src="http://localhost/lab/assets/admin/jstree-dist/jstree.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/jstree-dist/themes/default/style.min.css" />
   <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/custom.css" />
-  <!-- Select2- Css -->
-  <link rel="stylesheet" href="http://localhost/lab/assets/admin/plugins/select2/select2.min.css">
-  <!-- SLIDENAV -->
-  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/js/slidernav/slidernav.css" />
-
-
-  <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-  <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
-
+  
 <style>
 body {
   background: rgb(204,204,204); 
