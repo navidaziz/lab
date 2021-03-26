@@ -9,14 +9,14 @@
 <script src="script.js"></script>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
-  <title>Al-Khidmat Diagnostic Center Chitral</title>
+  <title>CCML</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/js/magic-suggest/magicsuggest-1.3.1-min.css" />
-  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/css/cloud-admin.css" />
-  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/themes/default.css" id="skin-switcher" />
-  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/responsive.css" />
+  <link rel="stylesheet" type="text/css" href="http://localhost/lab/assets/admin/css/cloud-admin.css" media='screen,print' />
+  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/themes/default.css" media='screen,print' id="skin-switcher" />
+  <link rel="stylesheet" type="text/css"  href="http://localhost/lab/assets/admin/css/responsive.css" media='screen,print' />
   <script> var site_url='http://localhost/lab/admin';</script>
   <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
   <script src="http://localhost/lab/assets/admin/js/jquery/jquery-2.0.3.min.js"></script>

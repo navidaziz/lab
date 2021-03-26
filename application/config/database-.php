@@ -101,11 +101,11 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 
-$db['default']['username'] = 'chitralcom_mcq';
+$db['default']['username'] = 'root';
 
-$db['default']['password'] = '@Pioneer9999';
+$db['default']['password'] = '';
 
-$db['default']['database'] = 'chitralcom_mcqs';
+$db['default']['database'] = 'alkhidmat';
 
 
 $db['default']['dbdriver'] = 'mysqli';
