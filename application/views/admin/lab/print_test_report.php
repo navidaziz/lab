@@ -80,6 +80,7 @@ page[size="A5"][layout="landscape"] {
         
         table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
           padding: 2px !important;
+		  font-size: 14px !important;
         }
        
 </style>
