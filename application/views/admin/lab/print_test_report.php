@@ -60,15 +60,13 @@ page[size="A5"][layout="landscape"] {
   body, page {
     margin: 0;
     box-shadow: 0;
+    color:black;
   }
   
 }
 
         
-        table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-          padding: 2px !important;
-		  font-size: 15px !important;
-        }
+       
        
 </style>
 </head>
@@ -76,13 +74,14 @@ page[size="A5"][layout="landscape"] {
 <page size='A4'>
 <div style="padding: 40px;">
 
-<table style="width: 100%; margin-top: 100px;">
-  <thead>
+<table style="width: 100%;">
+  <thead >
     <tr>
       <td>
-      <table style="width: 100%;">
-      <tr>
+      <table style="width: 100%; margin-top: 100px;">
+      <tr >
         <td style="width: 50%;">
+        
           <div style="border: 1px dashed black; margin: 5px; padding:5px">
               <table  style="text-align: left; width:100%; font-size: 14px !important;">
               <tr>
@@ -126,6 +125,7 @@ page[size="A5"][layout="landscape"] {
           </tr>
           </table>
         </div>
+        
       </td>
       </tr>
   </table>
@@ -137,7 +137,7 @@ page[size="A5"][layout="landscape"] {
       <td> 
 
       <?php foreach ($patient_tests_groups as $patient_tests_group) { ?>
-      <h5><strong><?php echo $patient_tests_group->test_group_name; ?><?php echo $patient_tests_group->test_group_id; ?></strong></h5>
+      <h5><strong><?php echo $patient_tests_group->test_group_name; ?></strong></h5>
       <table class="table table-bordered" style="text-align: left;">
        
         <?php
@@ -156,8 +156,8 @@ page[size="A5"][layout="landscape"] {
 		<?php if($patient_test->test_result!=''){ ?>
 <?php if($count==1){ ?>
       <tr>
-          <th>#</th>
-          <th>Test Name</th>
+          <!-- <th >#</th> -->
+          <th style="width:200px">Test Name</th>
           
           <th>Test Result</th>
           
@@ -169,7 +169,7 @@ page[size="A5"][layout="landscape"] {
         </tr>
 <?php } ?>
           <tr>
-            <th><?php echo $count++; ?></th>
+            <!-- <th><?php echo $count++; ?></th> -->
             <th><?php echo $patient_test->test_name; ?></th>
             
             <th> <?php echo $patient_test->test_result; ?> </th>
