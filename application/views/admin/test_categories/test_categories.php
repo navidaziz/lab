@@ -71,7 +71,8 @@
                           
 							<th><?php echo $this->lang->line('test_category'); ?></th>
 <th><?php echo $this->lang->line('description'); ?></th>
-<th><?php echo $this->lang->line('image'); ?></th><th><?php echo $this->lang->line('Order'); ?></th><th><?php echo $this->lang->line('Status'); ?></th><th><?php echo $this->lang->line('Action'); ?></th>
+<!-- <th><?php echo $this->lang->line('image'); ?></th> -->
+<th><?php echo $this->lang->line('Order'); ?></th><th><?php echo $this->lang->line('Status'); ?></th><th><?php echo $this->lang->line('Action'); ?></th>
                         </tr>
 						</thead>
 						<tbody>
@@ -86,11 +87,11 @@
             <td>
                 <?php echo $test_category->description; ?>
             </td>
-            <td>
+            <!-- <td>
             <?php
                 echo file_type(base_url("assets/uploads/".$test_category->image));
             ?>
-            </td>
+            </td> -->
                                 <td>
                                   <a class="llink llink-orderup" href="<?php echo site_url(ADMIN_DIR."test_categories/up/".$test_category->test_category_id."/".$this->uri->segment(3)); ?>"><i class="fa fa-arrow-up"></i> </a>
                                   <a class="llink llink-orderdown" href="<?php echo site_url(ADMIN_DIR."test_categories/down/".$test_category->test_category_id."/".$this->uri->segment(3)); ?>"><i class="fa fa-arrow-down"></i></a>

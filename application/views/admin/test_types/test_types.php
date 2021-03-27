@@ -71,7 +71,7 @@
                           
 							<th><?php echo $this->lang->line('test_type'); ?></th>
 <th><?php echo $this->lang->line('test_description'); ?></th>
-<th><?php echo $this->lang->line('image'); ?></th>
+<!-- <th><?php echo $this->lang->line('image'); ?></th> -->
 <th><?php echo $this->lang->line('test_category'); ?></th><th><?php echo $this->lang->line('Order'); ?></th><th><?php echo $this->lang->line('Status'); ?></th><th><?php echo $this->lang->line('Action'); ?></th>
                         </tr>
 						</thead>
@@ -87,11 +87,11 @@
             <td>
                 <?php echo $test_type->test_description; ?>
             </td>
-            <td>
+            <!-- <td>
             <?php
                 echo file_type(base_url("assets/uploads/".$test_type->image));
             ?>
-            </td>
+            </td> -->
             <td>
                 <?php echo $test_type->test_category; ?>
             </td>

@@ -36,6 +36,9 @@
 	</div>
 </div>
 <!-- /PAGE HEADER -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+  
 
 <!-- PAGE MAIN CONTENT -->
 <div class="row">
@@ -65,7 +68,7 @@
 			
             <div class="table-responsive">
                 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="testGroupsTable">
 						<thead>
 						  <tr>
                           <th>#</th>
@@ -137,3 +140,12 @@
 	</div>
 	<!-- /MESSENGER -->
 </div>
+<script>
+
+$(document).ready( function () {
+    $('#testGroupsTable').DataTable({
+      "pageLength": 200
+    });
+} );
+
+</script>

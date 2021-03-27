@@ -113,28 +113,51 @@
         </div>
     </div>
   </div>
-  <div class="col-md-5" style="padding-left:1px !important; padding-right:1px !important; ">
+  <div class="col-md-4" style="padding-left:1px !important; padding-right:1px !important; ">
     <div class="box border blue" id="messenger">
       <div class="box-title">
         <h4><i class="fa fa-flask"></i>Lab Tests</h4>
       </div>
       <div class="box-body">
       <div class="row" style="font-size: 12px !important;">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+      <div class="col-md-12" >
+      <table id="testGroupsTable" class="display">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Test Gropup Name</th>
+            <th>Time</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($test_groups as $test_group){ ?>
+    <tr>
+            <td><input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" /></td>
+            <td><strong style="margin-left:2px;">
+            <?php echo substr($test_group->test_group_name,0,20); ?>
+             </strong></td>
+            <td><?php echo $test_group->test_time; ?> min</td>
+            <td><?php echo $test_group->test_price; ?> Rs.</td>
+        </tr>
+     <?php } ?>   
+    </tbody>
+</table>
+<script>
+
+$(document).ready( function () {
+    $('#testGroupsTable').DataTable({
+      "pageLength": 13
+    });
+} );
+
+</script>
+      </div>
       
       
-        <?php foreach($test_groups as $test_group){ ?>
-        <div class="col-md-3" style="padding-left:8px !important; padding-right:8px !important; ">
-		<div style="margin:1px; border:1px solid #CCC; border-radius:2px; margin-bottom:5px; -webkit-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);
--moz-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);
-box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
-		<input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" />
-    <strong style="margin-left:2px;"><?php echo substr($test_group->test_group_name,0,20); ?></strong>
-        <span style="font-size:9px; display:block; margin-left:30px !important"> Rs: <?php echo $test_group->test_price; ?> - 
-        <?php echo $test_group->test_time; ?>min</span>
-        </div>
-        </div>
-        
-        <?php } ?>
         
         </div>
         
@@ -143,7 +166,7 @@ box-shadow: -2px 0px 14px -3px rgba(0,0,0,0.37);  ">
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="box border blue" id="messenger">
       <div class="box-title">
         <h4><i class="fa fa-file"></i>lab Test Report Status</h4>

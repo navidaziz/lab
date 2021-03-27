@@ -1,9 +1,8 @@
-<!-- PAGE HEADER-->
-
-<link href="<?php echo site_url("assets/".ADMIN_DIR."select2/select2.min.css"); ?>" rel="stylesheet" />
-<script src="<?php echo site_url("assets/".ADMIN_DIR."select2/select2.min.js"); ?>"></script>
+ 
 
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
@@ -60,7 +59,7 @@
 			
             <div class="table-responsive">
                 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" >
 						<thead>
                         
 						  <tr>
@@ -172,7 +171,8 @@
                
 
                 <div class="col-md-12">
-                   <select style="height: 350px;" name="test_id[]"  class="form-control js-example-basic-multiple" multiple="" required="" >
+                    <b>Search Test</b>
+                   <select  name="test_id[]"  class="js-example-basic-single" multiple="multiple" required="required" style="width: 100% !important;" >
                 <?php foreach($test_types as $test_type){ ?>
                 <optgroup label = "<?php echo $test_type->test_type;  ?>">
                 	<?php foreach($test_type->tests as $test_id => $test_name){ ?>
@@ -241,3 +241,10 @@ $.ajax({
 </script>
 
 
+
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>

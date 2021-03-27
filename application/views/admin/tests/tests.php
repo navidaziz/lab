@@ -64,15 +64,20 @@
 		</div><div class="box-body">
 			
             <div class="table-responsive">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+ 
                 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="testTable">
 						<thead>
 						  <tr>
                           
 							<th><?php echo $this->lang->line('test_name'); ?></th>
 <!-- <th><?php echo $this->lang->line('test_time'); ?></th>
 <th><?php echo $this->lang->line('test_price'); ?></th> -->
-<th><?php echo $this->lang->line('test_description'); ?></th>
+<!-- <th><?php echo $this->lang->line('test_description'); ?></th> -->
+<th>Unit</th>
 <th><?php echo $this->lang->line('normal_values'); ?></th>
 <th><?php echo $this->lang->line('test_category'); ?></th>
 <th><?php echo $this->lang->line('test_type'); ?></th><th><?php echo $this->lang->line('Order'); ?></th><th><?php echo $this->lang->line('Status'); ?></th><th><?php echo $this->lang->line('Action'); ?></th>
@@ -93,9 +98,13 @@
             <td>
                 <?php echo $test->test_price; ?>
             </td> -->
-            <td>
+            <!-- <td>
                 <?php echo substr($test->test_description, 0,  20); ?>
-            </td>
+            </td> -->
+            <td>  
+                <input onkeyup="add_test_unit('<?php echo $test->test_id; ?>')" type="text" value="<?php echo $test->unit; ?>" name="test_unit" id="test_unit_<?php echo $test->test_id; ?>" />
+                         </td>
+
             <td>
                 <?php echo $test->normal_values; ?>
             </td>
@@ -149,3 +158,29 @@
 	</div>
 	<!-- /MESSENGER -->
 </div>
+
+<script>
+function add_test_unit(test_id){
+test_unit = $('#test_unit_'+test_id).val();
+$.ajax({
+				type: "POST",
+				url: '<?php echo site_url(ADMIN_DIR . "test_groups/add_test_unit"); ?>',
+				data: {
+					test_unit: test_unit,
+                    test_id, test_id
+				}
+			}).done(function(data) {
+				//$('#edit_student_info_body').html(data);
+			});
+}
+</script>
+
+<script>
+
+$(document).ready( function () {
+    $('#testTable').DataTable({
+      "pageLength": 500
+    });
+} );
+
+</script>
