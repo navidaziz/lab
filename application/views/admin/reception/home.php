@@ -55,7 +55,7 @@
 <tr><td>Address: </td><td><input type="text" name="patient_address" value="" id="patient_address" class="for m-control" style="" required="required" title="Address" placeholder="Address"></td></tr>
 <tr><td>Age: </td><td><input type="number" name="patient_age" value="" id="patient_age" class="for m-control" style="" required="required" title="Patient Age" placeholder="Patient Age"></td></tr>
 <tr><td>Sex: </td><td><input type="radio" name="patient_gender" value="Male" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Male</label><input type="radio" name="patient_gender" value="Female" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Female</label></td></tr>
-<tr><td>Refered By: </td><td><select class="for m-control" required name="refered_by">
+<tr><td>Refereed By: </td><td><select class="for m-control" required name="refered_by">
      <option value="">Refered By</option>
 	  <?php 
 			
@@ -122,7 +122,7 @@
       <div class="row" style="font-size: 12px !important;">
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
   
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
       <div class="col-md-12" >
       <table id="testGroupsTable" class="display">
     <thead>

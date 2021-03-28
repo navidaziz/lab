@@ -231,6 +231,70 @@ class Lab extends Admin_Controller{
 			$this->load->view(ADMIN_DIR."lab/print_test_report", $this->patient_test_data());
 			}
 		
+			public function print_patient_test_type_report($invoice_id){ 
+				$_POST['invoice_id'] = $invoice_id;
+				$this->load->view(ADMIN_DIR."lab/print_test_type_report", $this->patient_test_type_data());
+				}
+
+
+				public function patient_test_type_data(){
+					$invoice_id = (int) $this->input->post('invoice_id');
+					$this->data["invoice_id"] = $invoice_id;
+					$where = "`invoices`.`status` IN (1,2,3) AND `invoices`.`invoice_id`= '".$invoice_id."'";
+					$this->data["invoice_detail"]= $this->invoice_model->get_invoice_list($where, false)[0];
+					
+					$query="SELECT
+						`test_groups`.`test_group_id`,
+						`test_groups`.`test_group_name`
+						, `test_groups`.`test_time` 
+					FROM `test_groups`,
+							`patient_tests` 
+					WHERE `test_groups`.`test_group_id` = `patient_tests`.`test_group_id`
+					AND `patient_tests`.`invoice_id`=$invoice_id
+					GROUP BY `test_groups`.`test_group_name`;";
+			
+					$patient_tests_groups = $this->db->query($query)->result();
+					foreach($patient_tests_groups as $patient_tests_group){
+								$query="SELECT
+									`test_types`.`test_type`
+									, `patient_tests`.`test_type_id`
+								FROM `test_types`,
+								`patient_tests`
+								WHERE `test_types`.`test_type_id` = `patient_tests`.`test_type_id`
+								AND `patient_tests`.`test_group_id`= '".$patient_tests_group->test_group_id."'
+								AND `patient_tests`.`invoice_id`='".$invoice_id."'
+								GROUP BY `patient_tests`.`test_type_id`";
+								$patient_tests_types = $this->db->query($query)->result();
+								foreach($patient_tests_types as $patient_tests_type){
+									$where = "`patient_tests`.`invoice_id` = '".$invoice_id."'
+									AND `patient_tests`.`test_group_id` = '".$patient_tests_group->test_group_id."' 
+									AND `patient_tests`.`test_type_id` =  '".$patient_tests_type->test_type_id."'";
+						  			$patient_tests_type->patient_tests = $this->patient_test_model->get_patient_test_list($where, false);
+				  
+								}
+								$patient_tests_group->patient_tests_types = $patient_tests_types;
+
+
+									}
+					$this->data["patient_tests_groups"] = $patient_tests_groups;
+			
+					$query="SELECT * FROM `invoices` WHERE `invoices`.`invoice_id`=$invoice_id;";
+					$invoice= $this->db->query($query)->result()[0];
+					$query="SELECT 
+								`test_groups`.`test_group_name`, 
+								`invoice_test_groups`.`price`,
+								`test_groups`.`test_price`,
+								`test_groups`.`test_time` 
+							FROM
+								`invoice_test_groups`,
+								`test_groups` 
+							WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id` 
+							AND `invoice_test_groups`.`invoice_id`=$invoice_id;";
+					$invoice->invoice_details = $this->db->query($query)->result();
+					$this->data["invoice"] = $invoice;
+					return $this->data;
+				}	
+		
     
     
 }        

@@ -66,13 +66,19 @@ page[size="A5"][layout="landscape"] {
 }
 
         
-       
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 0.628571;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    font-size: 15px !important;
+}    
        
 </style>
 </head>
 <body  >
 <page size='A4'>
-<div style="padding: 40px;">
+<div style="padding: 40px;" contenteditable="true">
 
 <table style="width: 100%;">
   <thead >
@@ -80,7 +86,7 @@ page[size="A5"][layout="landscape"] {
       <td>
       <table style="width: 100%; margin-top: 100px;">
       <tr >
-        <td style="width: 50%;">
+        <td style="width: 45%;">
         
           <div style="border: 1px dashed black; margin: 5px; padding:5px">
               <table  style="text-align: left; width:100%; font-size: 14px !important;">
@@ -116,7 +122,7 @@ page[size="A5"][layout="landscape"] {
           </tr>
 
           <tr>
-          <th>Refered By:</th>
+          <th>Refereed By:</th>
           <td><?php echo str_replace("Muhammad", "M.", $invoice_detail->doctor_name) . "( " . $invoice_detail->doctor_designation . " )"; ?></td>
           </tr>
           <tr>
@@ -132,7 +138,7 @@ page[size="A5"][layout="landscape"] {
       </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <tr>
       <td> 
 
@@ -159,7 +165,7 @@ page[size="A5"][layout="landscape"] {
           <!-- <th >#</th> -->
           <th style="width:200px">Test Name</th>
           
-          <th>Test Result</th>
+          <th style="width:200px">Test Result</th>
           
           <?php if($normal_value){ ?>
             <th>Unit</th>
@@ -175,8 +181,8 @@ page[size="A5"][layout="landscape"] {
             <th> <?php echo $patient_test->test_result; ?> </th>
             
             <?php if($normal_value){ ?> 
-              <th> <?php echo $patient_test->unit; ?> </th>
-              <th><?php echo $patient_test->test_normal_value; ?></th><?php }  ?>
+              <td> <?php echo $patient_test->unit; ?> </td>
+              <td><?php echo $patient_test->test_normal_value; ?></td><?php }  ?>
             <!-- <td><?php echo $patient_test->remarks; ?> </td> -->
           </tr>
 		  <?php } ?>

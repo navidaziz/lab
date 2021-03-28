@@ -32,7 +32,7 @@ class Test_groups extends Admin_Controller{
     }
     //---------------------------------------------------------------
 
-
+    
 	
     /**
      * get a list of all items that are not trashed
@@ -46,6 +46,19 @@ class Test_groups extends Admin_Controller{
 		 $this->data["pagination"]='';
 		 $this->data["title"] = $this->lang->line('Test Groups');
 		$this->data["view"] = ADMIN_DIR."test_groups/test_groups";
+		$this->load->view(ADMIN_DIR."layout", $this->data);
+    }
+
+
+    public function view2(){
+		
+        $where = "`test_groups`.`status` IN (0, 1) ORDER BY `test_groups`.`order`";
+		$this->data["test_groups"] = $this->test_group_model->get_test_group_list($where, false);
+		// $this->data["test_groups"] = $data->test_groups;
+		 //$this->data["pagination"] = $data->pagination;
+		 $this->data["pagination"]='';
+		 $this->data["title"] = $this->lang->line('Test Groups');
+		$this->data["view"] = ADMIN_DIR."test_groups/test_group_tests";
 		$this->load->view(ADMIN_DIR."layout", $this->data);
     }
     //-----------------------------------------------------
