@@ -71,6 +71,7 @@ page[size="A5"][layout="landscape"] {
     vertical-align: top;
     border-top: 1px solid #ddd;
     font-size: 15px !important;
+    
 }
        
        

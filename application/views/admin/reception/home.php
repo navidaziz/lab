@@ -105,6 +105,7 @@
         <tr><th>Discount: </th><td id="discount_total">00.00 Rs.</td></tr>
         <tr><th>Payable: </th><th id="payable">00.00 Rs.</th></tr>
         </table>
+        <input type="hidden" name="testGroupIDs" value="" id="testGroupIDs" />
 </div>
         <input type="submit" name="submit" value="Save and Print" class="btn btn-primary" style="width:100%">
         </div>
@@ -124,11 +125,13 @@
   
        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
       <div class="col-md-12" >
+     
       <table id="testGroupsTable" class="display">
     <thead>
         <tr>
             <th>#</th>
-            <th>Test Gropup Name</th>
+            <!-- <th>G_ID</th> -->
+            <th>Test Group Name</th>
             <th>Time</th>
             <th>Price</th>
         </tr>
@@ -136,9 +139,12 @@
     <tbody>
     <?php foreach($test_groups as $test_group){ ?>
     <tr>
-            <td><input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" /></td>
+            <td>
+            <input style="display: inline;" name="test_group_id[]" id="TG_<?php echo $test_group->test_group_id; ?>" onclick="set_price('<?php echo $test_group->test_group_id; ?>', '<?php echo $test_group->test_group_name; ?>', '<?php echo $test_group->test_price; ?>', '<?php echo $test_group->test_time; ?>')" type="checkbox" value="<?php echo $test_group->test_group_id; ?>" />
+            </td>
+            <!-- <td><?php echo $test_group->test_group_id; ?></td> -->
             <td><strong style="margin-left:2px;">
-            <?php echo substr($test_group->test_group_name,0,20); ?>
+            <?php echo $test_group->test_group_name; ?>
              </strong></td>
             <td><?php echo $test_group->test_time; ?> min</td>
             <td><?php echo $test_group->test_price; ?> Rs.</td>
@@ -335,10 +341,12 @@ function test_token(invoice_id, Patient_name, other_info){
      prices  = [];
      var test_total_price = 0;
      function set_price(test_group_id, test_group_name, test_price, test_time){
+      
+       
 
       if($('#TG_'+test_group_id).is(':checked')){
         test_total_price = 0;
-        prices[test_group_name] = {'price' : test_price, 'test_time' : test_time };
+        prices[test_group_name] = {'price' : test_price, 'test_time' : test_time, 'test_group_id' :  test_group_id};
       }else{
         test_total_price = 0;
         delete prices[test_group_name];
@@ -347,6 +355,7 @@ function test_token(invoice_id, Patient_name, other_info){
       var price_list = '<table class="table table-bordered"><tr><td>#</td><td>Test Name</td><td>Price</td></tr>';
      
       var count=0;
+      var  $testGrouupIds ="";
       for (var key in prices) {
         
         if (prices.hasOwnProperty(key))
@@ -356,10 +365,11 @@ function test_token(invoice_id, Patient_name, other_info){
             price_list+='<td>'+prices[key].price+'</td>';
             price_list+='</td></tr>';
             test_total_price = parseInt(test_total_price)+parseInt(prices[key].price);
-
+            $testGrouupIds = $testGrouupIds+prices[key].test_group_id+',';
 
 
       }
+      $('#testGroupIDs').val($testGrouupIds);
       price_list+= '</table>';
 
       $('#test_price_list').html(price_list);

@@ -38,8 +38,9 @@ class Reception extends Admin_Controller{
 		
 		//save patient data and get pacient id ....
 		$patient_id = $this->patient_model->save_data();
-		
-		$test_group_ids =  implode(',', $this->input->post('test_group_id'));
+		$test_group_ids = rtrim($this->input->post('testGroupIDs'), ',');
+		//$test_group_ids =  implode(',', $this->input->post('test_group_id'));
+		//exit();
 		
 		$discount = $this->input->post("discount");
 		
@@ -127,7 +128,6 @@ class Reception extends Admin_Controller{
 													'".$order++."')";
 				$this->db->query($query);
 			}
-			
 			
 			$this->session->set_flashdata("msg_success", "Data Save Successfully.");
             redirect(ADMIN_DIR."reception");
