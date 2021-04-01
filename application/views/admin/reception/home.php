@@ -135,7 +135,7 @@
             <th>Time</th>
             <th>Price</th>
         </tr>
-    </thead>
+    </thead> 
     <tbody>
     <?php foreach($test_groups as $test_group){ ?>
     <tr>
