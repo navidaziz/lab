@@ -7,7 +7,7 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
               <table class="table table-bordered">
                 <h4>Today</h4>
                 <tr>
@@ -52,8 +52,9 @@
                   <td>#</td>
                   <td>Name</td>
                   <td>Total Refered</td>
-                  <td>Total Refered This Month</td>
-                  <td>Total Refered Today</td>
+                  <td>Previous Month</td>
+                  <td>Current Month</td>
+                  <td>Refered Today</td>
                 </tr>
                 <?php
                 $count = 1;
@@ -62,6 +63,7 @@
                     <td><?php echo $count++ ?></td>
                     <td><?php echo $doctors_refered->doctor_name;   ?> - <?php echo $doctors_refered->doctor_designation;   ?></td>
                     <td><?php echo $doctors_refered->total_refered;   ?></td>
+                    <td><?php echo $doctors_refered->total_refered_previous_month;   ?></td>
                     <td><?php echo $doctors_refered->total_refered_current_month;   ?></td>
                     <td><?php echo $doctors_refered->total_refered_today;   ?></td>
                   </tr>
