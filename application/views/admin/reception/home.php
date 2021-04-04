@@ -319,7 +319,8 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
 
                 <?php  } ?>
                 <?php if ($test->status == 3) { ?>
-                  <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">View Report</a>
+                  <a href="#" onclick="get_patient_test_report('<?php echo $test->invoice_id; ?>')">
+                    <i class="fa fa-eye" aria-hidden="true"></i> Report</a>
                   <a style="margin-left: 10px;" target="new" href="<?php echo site_url(ADMIN_DIR . "lab/print_patient_test_report/$test->invoice_id") ?>"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
                 <?php  } ?>
               </td>

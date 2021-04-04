@@ -115,6 +115,16 @@ class Dashboard extends Admin_Controller
 
 		$this->data['income_expence_report'] = $income_expence_report;
 
+		$query = "SELECT COUNT(`invoices`.`test_report_by`) AS total_refered, 
+						`doctors`.`doctor_name`
+						, `doctors`.`doctor_designation`
+					FROM `doctors`,
+					`invoices` 
+					WHERE `doctors`.`doctor_id` = `invoices`.`patient_refer_by`
+					GROUP BY `invoices`.`patient_refer_by`
+					ORDER BY total_refered DESC";
+		$doctors_refereds = $this->db->query($query)->result();
+		$this->data['doctors_refereds'] = $doctors_refereds;
 
 		$this->data["view"] = ADMIN_DIR . "dashboard/dashboard";
 		$this->load->view(ADMIN_DIR . "layout", $this->data);

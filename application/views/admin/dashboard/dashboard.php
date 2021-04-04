@@ -7,7 +7,7 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <table class="table table-bordered">
                 <h4>Today</h4>
                 <tr>
@@ -15,24 +15,28 @@
                     <h5>Total Test</h5>
                   </td>
                   <td style="color:green">
-                    <h5>Price</h5>
-                  </td>
-                  <td style="color:green">
-                    <h5>Discount</h5>
-                  </td>
-                  <td style="color:green">
-                    <h5>Income</h5>
+                    <h4><strong><?php echo $total_test; ?></strong></h4>
                   </td>
                 </tr>
                 <tr>
                   <td style="color:green">
-                    <h4><strong><?php echo $total_test; ?></strong></h4>
+                    <h5>Price</h5>
                   </td>
                   <td style="color:green">
                     <h4><strong><?php echo $price; ?></strong></h4>
                   </td>
+                </tr>
+                <tr>
+                  <td style="color:green">
+                    <h5>Discount</h5>
+                  </td>
                   <td style="color:green">
                     <h4><strong><?php echo $discount; ?></strong></h4>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:green">
+                    <h5>Income</h5>
                   </td>
                   <td style="color:green">
                     <h4><strong><?php echo $total_income; ?></strong></h4>
@@ -40,6 +44,28 @@
                 </tr>
               </table>
             </div>
+
+            <div class="col-md-4">
+              <table class="table table-bordered">
+                <h4>Refered By Doctors</h4>
+                <tr>
+                  <td>#</td>
+                  <td>Name</td>
+                  <td>Toral Refered</td>
+                </tr>
+                <?php
+                $count = 1;
+                foreach ($doctors_refereds as $key => $doctors_refered) { ?>
+                  <tr>
+                    <td><?php echo $count++ ?></td>
+                    <td><?php echo $doctors_refered->doctor_name;   ?> - <?php echo $doctors_refered->doctor_designation;   ?></td>
+                    <td><?php echo $doctors_refered->total_refered;   ?></td>
+                  </tr>
+
+                <?php } ?>
+              </table>
+            </div>
+
           </div>
         </div>
       </div>
@@ -52,10 +78,10 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <div class="hidden-xs col-md-4">
+            <div class="hidden-xs col-md-6">
               <div id="current_month_report"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
               <h2>Current Month Day Wise Report</h2>
               <div style=" width:100%; height:350px !important; overflow:scroll; overflow-x: hidden;">
                 <table class="table">
