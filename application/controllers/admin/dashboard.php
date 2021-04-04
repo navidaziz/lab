@@ -116,6 +116,11 @@ class Dashboard extends Admin_Controller
 		$this->data['income_expence_report'] = $income_expence_report;
 
 		$query = "SELECT COUNT(`invoices`.`test_report_by`) AS total_refered, 
+					(SELECT COUNT(`i`.`test_report_by`) 
+					FROM `invoices` AS `i` 
+					WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
+					AND DATE(`i`.created_date) = DATE(NOW())
+					GROUP BY `i`.`patient_refer_by`) AS total_refered_today, 
 						`doctors`.`doctor_name`
 						, `doctors`.`doctor_designation`
 					FROM `doctors`,

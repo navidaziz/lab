@@ -51,7 +51,8 @@
                 <tr>
                   <td>#</td>
                   <td>Name</td>
-                  <td>Toral Refered</td>
+                  <td>Total Refered</td>
+                  <td>Total Refered Today</td>
                 </tr>
                 <?php
                 $count = 1;
@@ -60,6 +61,8 @@
                     <td><?php echo $count++ ?></td>
                     <td><?php echo $doctors_refered->doctor_name;   ?> - <?php echo $doctors_refered->doctor_designation;   ?></td>
                     <td><?php echo $doctors_refered->total_refered;   ?></td>
+                    <td><?php echo $doctors_refered->total_refered_today;   ?></td>
+
                   </tr>
 
                 <?php } ?>
