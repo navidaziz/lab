@@ -7,7 +7,7 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-3">
               <table class="table table-bordered">
                 <h4>Today</h4>
                 <tr>
@@ -45,7 +45,7 @@
               </table>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-5">
               <table class="table table-bordered">
                 <h4>Refered By Doctors</h4>
                 <tr>
