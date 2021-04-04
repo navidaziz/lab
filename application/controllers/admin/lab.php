@@ -231,6 +231,14 @@ class Lab extends Admin_Controller
 		$this->db->query($query);
 		redirect(ADMIN_DIR . "reception/");
 	}
+
+	public function print_patient_test_receipts($invoice_id)
+	{
+		$_POST['invoice_id'] = $invoice_id;
+		$this->load->view(ADMIN_DIR . "lab/print_patient_test_receipts", $this->patient_test_data());
+	}
+
+
 	public function print_patient_test_report($invoice_id)
 	{
 		$_POST['invoice_id'] = $invoice_id;

@@ -211,7 +211,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
   <div class="col-md-5">
     <div class="box border blue" id="messenger">
       <div class="box-title">
-        <h4><i class="fa fa-file"></i>lab Test Report Status</h4>
+        <h4><i class="fa fa-file"></i>Lab Test Report Status</h4>
       </div>
       <div class="box-body" style="font-size: 12px !important;">
         <table class="table table-bordered">
@@ -220,7 +220,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
             <td style="color:green"> Total Test </td>
             <td style="color:green"> Price </td>
             <td style="color:green"> Discount </td>
-            <td style="color:green"> Income </td>
+            <td style="color:green"> Total </td>
           </tr>
           <tr>
             <td style="color:green"> <strong><?php echo $total_test; ?></strong> </td>
@@ -235,7 +235,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
               <th>#</th>
               <th>Name</th>
               <th>Mobile</th>
-              <th style="width: 10px  !important;">Test</th>
+              <th>Receipts</th>
               <!-- <th>Price</th>
               <th>Discount</th> -->
               <th>Rs:</th>
@@ -260,22 +260,24 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
               <td><?php echo $test->patient_name; ?></td>
               <td><?php echo $test->patient_mobile_no; ?></td>
               <td>
+                <a style="margin-left: 10px;" target="new" href="<?php echo site_url(ADMIN_DIR . "lab/print_patient_test_receipts/$test->invoice_id") ?>"><i class="fa fa-print" aria-hidden="true"></i> Receipts</a>
+
                 <?php
-                $query = "SELECT
-                    `test_groups`.`test_group_name`,
-                    `test_groups`.`test_group_id`
-                  FROM
-                  `invoice_test_groups`,
-                  `test_groups` 
-                  WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id`
-                  AND `invoice_test_groups`.`invoice_id` = '" . $test->invoice_id . "'";
-                $query_result = $this->db->query($query);
-                $patient_tests = $query_result->result();
-                $tests = '';
-                foreach ($patient_tests as $patient_test) {
-                  $tests .= $patient_test->test_group_name . ',';
-                }
-                echo $tests;
+                // $query = "SELECT
+                //     `test_groups`.`test_group_name`,
+                //     `test_groups`.`test_group_id`
+                //   FROM
+                //   `invoice_test_groups`,
+                //   `test_groups` 
+                //   WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id`
+                //   AND `invoice_test_groups`.`invoice_id` = '" . $test->invoice_id . "'";
+                // $query_result = $this->db->query($query);
+                // $patient_tests = $query_result->result();
+                // $tests = '';
+                // foreach ($patient_tests as $patient_test) {
+                //   $tests .= $patient_test->test_group_name . ',';
+                // }
+                // echo $tests;
                 ?>
 
               </td>
@@ -285,28 +287,28 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
               <td>
                 <?php if ($test->status == 1) {
 
-                  $other_info = 'Patient Name: ' . $test->patient_name . '<br />';
-                  $other_info .= 'Mobile No: ' . $test->patient_mobile_no . '<br />';
-                  $other_info .= 'Address: ' . $test->patient_address . '<br />';
-                  $other_info .= 'Refered By: ' . $test->doctor_name . ' (' . $test->doctor_designation . ')<br />';
-                  $other_info .= 'Tests: <strong>';
-                  $patient_group_test_ids = '';
-                  //get the test groups for the pacient...
-                  $query = "SELECT
-                    `test_groups`.`test_group_name`,
-                    `test_groups`.`test_group_id`
-                  FROM
-                  `invoice_test_groups`,
-                  `test_groups` 
-                  WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id`
-                  AND `invoice_test_groups`.`invoice_id` = '" . $test->invoice_id . "'";
-                  $query_result = $this->db->query($query);
-                  $patient_tests = $query_result->result();
-                  foreach ($patient_tests as $patient_test) {
-                    $other_info .= $patient_test->test_group_name . ', ';
-                    $patient_group_test_ids .= $patient_test->test_group_id . ', ';
-                  }
-                  $other_info .= '</strong>';
+                  // $other_info = 'Patient Name: ' . $test->patient_name . '<br />';
+                  // $other_info .= 'Mobile No: ' . $test->patient_mobile_no . '<br />';
+                  // $other_info .= 'Address: ' . $test->patient_address . '<br />';
+                  // $other_info .= 'Refered By: ' . $test->doctor_name . ' (' . $test->doctor_designation . ')<br />';
+                  // $other_info .= 'Tests: <strong>';
+                  // $patient_group_test_ids = '';
+                  // //get the test groups for the pacient...
+                  // $query = "SELECT
+                  //   `test_groups`.`test_group_name`,
+                  //   `test_groups`.`test_group_id`
+                  // FROM
+                  // `invoice_test_groups`,
+                  // `test_groups` 
+                  // WHERE `invoice_test_groups`.`test_group_id` = `test_groups`.`test_group_id`
+                  // AND `invoice_test_groups`.`invoice_id` = '" . $test->invoice_id . "'";
+                  // $query_result = $this->db->query($query);
+                  // $patient_tests = $query_result->result();
+                  // foreach ($patient_tests as $patient_test) {
+                  //   $other_info .= $patient_test->test_group_name . ', ';
+                  //   $patient_group_test_ids .= $patient_test->test_group_id . ', ';
+                  // }
+                  // $other_info .= '</strong>';
 
                 ?>
 
