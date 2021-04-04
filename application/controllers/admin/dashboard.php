@@ -80,7 +80,8 @@ class Dashboard extends Admin_Controller
 			//Get income 
 			$query = "SELECT SUM(`total_price`) as total_income FROM `invoices`
 						  WHERE  YEAR(`invoices`.`created_date`) = '" . $year . "' 
-						  AND  MONTH(`invoices`.`created_date`) = '" . $month . "'";
+						  AND  MONTH(`invoices`.`created_date`) = '" . $month . "'
+						  AND `status` = 3";
 
 			$query_result = $this->db->query($query);
 			$DateQuery = date("F, Y", strtotime($date_query));
@@ -101,7 +102,8 @@ class Dashboard extends Admin_Controller
 			//Get income 
 			$query = "SELECT SUM(`total_price`) as total_income
 					  FROM `invoices`
-					  WHERE   DATE(`invoices`.`created_date`) = '" . $date_query . "'";
+					  WHERE   DATE(`invoices`.`created_date`) = '" . $date_query . "'
+					  AND `status` = 3";
 			$query_result = $this->db->query($query);
 			$DateQuery = date("d M, Y", strtotime($date_query));
 			if ($query_result->result()[0]->total_income) {
@@ -122,24 +124,28 @@ class Dashboard extends Admin_Controller
 				AND DATE(`i`.created_date) = DATE(CURRENT_DATE())
 				AND MONTH(`i`.created_date) = MONTH(CURRENT_DATE())
 				AND YEAR(`i`.created_date) = YEAR(CURRENT_DATE())
+				AND `i`.`status` = 3
 				GROUP BY `i`.`patient_refer_by`) AS total_refered_today, 
 				(SELECT COUNT(`i`.`test_report_by`) 
 				FROM `invoices` AS `i` 
 				WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
 				AND MONTH(`i`.created_date) = MONTH(CURRENT_DATE())
 				AND YEAR(`i`.created_date) = YEAR(CURRENT_DATE())
+				AND `i`.`status` = 3
 				GROUP BY `i`.`patient_refer_by`) AS total_refered_current_month,
 				(SELECT COUNT(`i`.`test_report_by`) 
 				FROM `invoices` AS `i` 
 				WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
 				AND MONTH(`i`.created_date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)
 				AND YEAR(`i`.created_date) = YEAR(CURRENT_DATE())
+				AND `i`.`status` = 3
 				GROUP BY `i`.`patient_refer_by`) AS total_refered_previous_month, 
 					`doctors`.`doctor_name`
 					, `doctors`.`doctor_designation`
 				FROM `doctors`,
 				`invoices` 
 				WHERE `doctors`.`doctor_id` = `invoices`.`patient_refer_by`
+				AND `invoices`.`status` = 3
 				GROUP BY `invoices`.`patient_refer_by`
 				ORDER BY total_refered DESC";
 		$doctors_refereds = $this->db->query($query)->result();
