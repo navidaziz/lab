@@ -116,18 +116,25 @@ class Dashboard extends Admin_Controller
 		$this->data['income_expence_report'] = $income_expence_report;
 
 		$query = "SELECT COUNT(`invoices`.`test_report_by`) AS total_refered, 
-					(SELECT COUNT(`i`.`test_report_by`) 
-					FROM `invoices` AS `i` 
-					WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
-					AND DATE(`i`.created_date) = DATE(NOW())
-					GROUP BY `i`.`patient_refer_by`) AS total_refered_today, 
-						`doctors`.`doctor_name`
-						, `doctors`.`doctor_designation`
-					FROM `doctors`,
-					`invoices` 
-					WHERE `doctors`.`doctor_id` = `invoices`.`patient_refer_by`
-					GROUP BY `invoices`.`patient_refer_by`
-					ORDER BY total_refered DESC";
+				(SELECT COUNT(`i`.`test_report_by`) 
+				FROM `invoices` AS `i` 
+				WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
+				AND DATE(`i`.created_date) = DATE(NOW())
+				GROUP BY `i`.`patient_refer_by`) AS total_refered_today, 
+				(SELECT COUNT(`i`.`test_report_by`) 
+				FROM `invoices` AS `i` 
+				WHERE `i`.`patient_refer_by` = `invoices`.`patient_refer_by`
+				AND MONTH(`i`.created_date) = MONTH(CURRENT_DATE())
+				AND YEAR(`i`.created_date) = YEAR(CURRENT_DATE())
+				GROUP BY `i`.`patient_refer_by`) AS total_refered_current_month, 
+					`doctors`.`doctor_name`
+					, `doctors`.`doctor_designation`
+				FROM `doctors`,
+				`invoices` 
+				WHERE `doctors`.`doctor_id` = `invoices`.`patient_refer_by`
+				GROUP BY `invoices`.`patient_refer_by`
+				ORDER BY total_refered DESC
+				";
 		$doctors_refereds = $this->db->query($query)->result();
 		$this->data['doctors_refereds'] = $doctors_refereds;
 
