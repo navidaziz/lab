@@ -33,13 +33,20 @@ class Dashboard extends Admin_Controller
 		$result = $this->db->query($query);
 		$years_report = $result->result();
 		foreach ($years_report as $year_report) {
-			$query = "SELECT sum(`total_price`) as `total_income` 
+			$query = "SELECT sum(`total_price`) as `total_income`,
+			sum(`discount`) as `discount`,
+			sum(`price`) as `price`,
+			COUNT(`invoice_id`) as `total_test`
 			          FROM `invoices` 
 					  WHERE  `status` = 3
 					  AND YEAR(`invoices`.`created_date`)= '$year_report->year'";
 			$result = $this->db->query($query);
 			$year_report->income_per_year = $result->result()[0]->total_income;
+			$year_report->discount = $result->result()[0]->discount;
+			$year_report->price = $result->result()[0]->price;
+			$year_report->total_test = $result->result()[0]->total_test;
 		}
+
 		$this->data['years_report'] = $years_report;
 
 		//today query .........................................................
@@ -78,7 +85,10 @@ class Dashboard extends Admin_Controller
 			$date_query = $year . "-" . $month . "-1";
 
 			//Get income 
-			$query = "SELECT SUM(`total_price`) as total_income FROM `invoices`
+			$query = "SELECT sum(`total_price`) as `total_income`,
+			sum(`discount`) as `discount`,
+			sum(`price`) as `price`,
+			COUNT(`invoice_id`) as `total_test` FROM `invoices`
 						  WHERE  YEAR(`invoices`.`created_date`) = '" . $year . "' 
 						  AND  MONTH(`invoices`.`created_date`) = '" . $month . "'
 						  AND `status` = 3";
@@ -87,8 +97,14 @@ class Dashboard extends Admin_Controller
 			$DateQuery = date("F, Y", strtotime($date_query));
 			if ($query_result->result()[0]->total_income) {
 				$month_income_expence_report[$DateQuery]['income'] = $query_result->result()[0]->total_income;
+				$month_income_expence_report[$DateQuery]['discount'] = $query_result->result()[0]->discount;
+				$month_income_expence_report[$DateQuery]['price'] = $query_result->result()[0]->price;
+				$month_income_expence_report[$DateQuery]['total_test'] = $query_result->result()[0]->total_test;
 			} else {
 				$month_income_expence_report[$DateQuery]['income'] = 0;
+				$month_income_expence_report[$DateQuery]['discount'] = 0;
+				$month_income_expence_report[$DateQuery]['price'] = 0;
+				$month_income_expence_report[$DateQuery]['total_test'] = 0;
 			}
 		}
 		$this->data['month_income_expence_report'] = $month_income_expence_report;
@@ -100,7 +116,10 @@ class Dashboard extends Admin_Controller
 			$date_query = $year . "-" . $month . "-" . $day;
 
 			//Get income 
-			$query = "SELECT SUM(`total_price`) as total_income
+			$query = "SELECT sum(`total_price`) as `total_income`,
+			sum(`discount`) as `discount`,
+			sum(`price`) as `price`,
+			COUNT(`invoice_id`) as `total_test`
 					  FROM `invoices`
 					  WHERE   DATE(`invoices`.`created_date`) = '" . $date_query . "'
 					  AND `status` = 3";
@@ -108,8 +127,14 @@ class Dashboard extends Admin_Controller
 			$DateQuery = date("d M, Y", strtotime($date_query));
 			if ($query_result->result()[0]->total_income) {
 				$income_expence_report[$DateQuery]['income'] = $query_result->result()[0]->total_income;
+				$income_expence_report[$DateQuery]['discount'] = $query_result->result()[0]->discount;
+				$income_expence_report[$DateQuery]['price'] = $query_result->result()[0]->price;
+				$income_expence_report[$DateQuery]['total_test'] = $query_result->result()[0]->total_test;
 			} else {
 				$income_expence_report[$DateQuery]['income'] = 0;
+				$income_expence_report[$DateQuery]['discount'] = 0;
+				$income_expence_report[$DateQuery]['price'] = 0;
+				$income_expence_report[$DateQuery]['total_test'] = 0;
 			}
 		}
 

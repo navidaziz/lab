@@ -90,11 +90,13 @@
             <div class="col-md-6">
               <h2>Current Month Day Wise Report</h2>
               <div style=" width:100%; height:350px !important; overflow:scroll; overflow-x: hidden;">
-                <table class="table">
+                <table class="table table-bordered">
                   <tr>
-                    <td>Date</td>
-
-                    <td>Income</td>
+                    <th>Date</th>
+                    <th>Total Tests</th>
+                    <th>Test Price</th>
+                    <th>Discount</th>
+                    <th>Total</th>
 
                   </tr>
                   <?php
@@ -113,8 +115,9 @@
                     <tr <?php if ($count == 0) { ?> style="background-color:#9F9 !important; " <?php $count++;
                                                                                               } ?>>
                       <td><?php echo $date; ?></td>
-
-
+                      <td><?php echo $report['total_test']; ?></td>
+                      <td><?php echo $report['price']; ?></td>
+                      <td><?php echo $report['discount']; ?></td>
 
                       <td><?php echo $report['income']; ?></td>
                     </tr>
@@ -157,10 +160,13 @@
             <div class="col-md-6">
               <h2>Monthly Report</h2>
               <div style=" width:100%; height:350px !important; overflow:scroll; overflow-x: hidden;">
-                <table class="table">
+                <table class="table table-bordered">
                   <tr>
-                    <td>Date</td>
-                    <td>Income</td>
+                    <th>Date</th>
+                    <th>Total Tests</th>
+                    <th>Test Price</th>
+                    <th>Discount</th>
+                    <th>Total</th>
                   </tr>
                   <?php
 
@@ -168,6 +174,9 @@
                     <tr <?php if ($date == date("F, Y", time())) { ?> style="background-color:#9F9 !important; font-size:16px;" <?php $count++;
                                                                                                                               } ?>>
                       <td><?php echo $date; ?></td>
+                      <td><?php echo $report['total_test']; ?></td>
+                      <td><?php echo $report['price']; ?></td>
+                      <td><?php echo $report['discount']; ?></td>
                       <td><?php echo $report['income']; ?></td>
                     </tr>
                   <?php } ?>
@@ -188,11 +197,28 @@
               <div id="year_report"></div>
             </div>
             <div class="col-md-6">
-
-              <table class="table">
+              <h2>Yearly Report</h2>
+              <table class="table table-bordered">
                 <tr>
-                  <td>Year</td>
-                  <td>Income</td>
+                  <th>Year</th>
+                  <th>Total Tests</th>
+                  <th>Test Price</th>
+                  <th>Discount</th>
+                  <th>Total</th>
+                </tr>
+                <tr>
+                  <td>2019</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>2020</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                 </tr>
                 <?php
 
@@ -200,6 +226,9 @@
                   <tr <?php if ($report->year == date("Y", time())) { ?> style="background-color:#9F9 !important; font-size:16px;" <?php $count++;
                                                                                                                                   } ?>>
                     <td><?php echo $report->year; ?></td>
+                    <td><?php echo $report->total_test; ?></td>
+                    <td><?php echo $report->price; ?></td>
+                    <td><?php echo $report->discount; ?></td>
                     <td><?php echo $report->income_per_year; ?></td>
                   </tr>
                 <?php } ?>
@@ -224,7 +253,7 @@
         x: -20 //center
       },
       subtitle: {
-        text: 'Monthly income, expenses and netincome Report',
+        text: 'Monthly Report',
         x: -20
       },
       xAxis: {
@@ -250,12 +279,12 @@
       tooltip: {
         valueSuffix: ' Total'
       },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
-      },
+      // legend: {
+      //   layout: 'vertical',
+      //   align: 'right',
+      //   verticalAlign: 'middle',
+      //   borderWidth: 0
+      // },
       series: [{
           name: 'Incomes',
           data: [<?php echo $income; ?>]
@@ -274,7 +303,7 @@
         x: -20 //center
       },
       subtitle: {
-        text: 'Day Wise income, expenses and netincome Report',
+        text: 'Current Month Days Wise Report',
         x: -20
       },
       xAxis: {
@@ -300,12 +329,12 @@
       tooltip: {
         valueSuffix: ' Total'
       },
-      legend: {
-        layout: 'horizontal',
-        align: 'bottom',
-        verticalAlign: 'bottom',
-        borderWidth: 0
-      },
+      // legend: {
+      //   layout: 'vertical',
+      //   align: 'right',
+      //   verticalAlign: 'middle',
+      //   borderWidth: 0
+      // },
       series: [{
           name: 'Incomes',
           data: [<?php echo $income; ?>]
@@ -324,11 +353,11 @@
         x: -20 //center
       },
       subtitle: {
-        text: 'Yearly income, expenses and netincome Report',
+        text: 'Yearly Report',
         x: -20
       },
       xAxis: {
-        categories: [
+        categories: ['2019', '2020',
           <?php
           $income = "";
           foreach ($years_report as $report) {
@@ -350,15 +379,15 @@
       tooltip: {
         valueSuffix: ' Total'
       },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
-      },
+      // legend: {
+      //   layout: 'vertical',
+      //   align: 'right',
+      //   verticalAlign: 'middle',
+      //   borderWidth: 0
+      // },
       series: [{
           name: 'Incomes',
-          data: [<?php echo $income; ?>]
+          data: [0, 0, <?php echo $income; ?>]
         }
 
       ]
