@@ -379,6 +379,8 @@ class Lab extends Admin_Controller
 					</tr>
 				<?php } ?>
 			</table>
-		<?php } ?>
+		<?php } else {
+			echo '<p style="color:red;"> Search Result not found. </p>';
+		} ?>
 <?php }
 }
