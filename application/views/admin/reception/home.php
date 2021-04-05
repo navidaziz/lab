@@ -214,21 +214,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
         <h4><i class="fa fa-file"></i>Lab Test Report Status</h4>
       </div>
       <div class="box-body" style="font-size: 12px !important;">
-        <table class="table table-bordered">
-          <tr>
-            <td rowspan="2" style="vertical-align: middle;"> Today </td>
-            <td style="color:green"> Total Test </td>
-            <td style="color:green"> Price </td>
-            <td style="color:green"> Discount </td>
-            <td style="color:green"> Total </td>
-          </tr>
-          <tr>
-            <td style="color:green"> <strong><?php echo $total_test; ?></strong> </td>
-            <td style="color:green"> <strong><?php echo $price; ?></strong> </td>
-            <td style="color:green"> <strong><?php echo $discount; ?></strong> </td>
-            <td style="color:green"> <strong><?php echo $total_income; ?></strong> </td>
-          </tr>
-        </table>
+
         <table class="table table-bordered">
           <thead>
             <tr>

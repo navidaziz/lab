@@ -28,6 +28,7 @@ class Dashboard extends Admin_Controller
 	public function index()
 	{
 
+		//Yearly report 
 		$query = "SELECT YEAR(`invoices`.`created_date`) as `year` 
 		          FROM `invoices`  GROUP BY YEAR(`invoices`.`created_date`)";
 		$result = $this->db->query($query);
@@ -45,11 +46,18 @@ class Dashboard extends Admin_Controller
 			$year_report->discount = $result->result()[0]->discount;
 			$year_report->price = $result->result()[0]->price;
 			$year_report->total_test = $result->result()[0]->total_test;
-		}
+			//get expense 
+			$query = "SELECT sum(`expense_amount`) as `expenses` 
+					  FROM `expenses` 
+					 WHERE `expenses`.`status` IN (0, 1) 
+					 AND YEAR(`expenses`.`created_date`)= '$year_report->year'";
 
+			$result = $this->db->query($query);
+			$year_report->expense_per_year = $result->result()[0]->expenses;
+		}
 		$this->data['years_report'] = $years_report;
 
-		//today query .........................................................
+		//Today report
 		$today = date("Y-m-d", time());
 		$query = "SELECT sum(`total_price`) as `total_income`,
 						 sum(`discount`) as `discount`,
@@ -73,12 +81,54 @@ class Dashboard extends Admin_Controller
 			$this->data['total_test'] = 0;
 		}
 
+		//today expense 
+		$query = "SELECT sum(`expense_amount`) as total_expenses 
+					FROM `expenses` WHERE `expenses`.`status` IN (0, 1) 
+					AND DATE(`expenses`.`created_date`) = '" . $today . "'";
+		$result = $this->db->query($query);
+		$total_expenses = $result->result()[0]->total_expenses;
+		if ($total_expenses) {
+			$this->data['total_expenses'] = $total_expenses;
+		} else {
+			$this->data['total_expenses'] = 0;
+		}
 
-		//......................................................................
+		$this->data['total_net_income'] = $total_income - $total_expenses;
+
+		$query = "SELECT 
+				 `expense_types`.`expense_type`,
+				 SUM(`expenses`.`expense_amount`) as expense_total 
+				 FROM
+				 `expense_types`,
+				 `expenses` 
+				 WHERE `expense_types`.`expense_type_id` = `expenses`.`expense_type_id`
+				 AND DATE(`expenses`.`created_date`) = '" . $today . "' 
+				 GROUP BY `expense_types`.`expense_type` ";
+		$query_result = $this->db->query($query);
+		$this->data['today_expenses'] = $query_result->result();
+
+		//Monthly report
 
 		$month = date("m", time());
 		$year = date("Y", time());
 		$today = date("d", time());
+
+
+		// get current month expense types
+		$query = "SELECT 
+		`expense_types`.`expense_type`,
+		SUM(`expenses`.`expense_amount`) as expense_total 
+		FROM
+		`expense_types`,
+		`expenses` 
+		WHERE `expense_types`.`expense_type_id` = `expenses`.`expense_type_id`
+		AND YEAR(`expenses`.`created_date`) = '" . $year . "' 
+		AND  MONTH(`expenses`.`created_date`) = '" . $month . "' 
+		GROUP BY `expense_types`.`expense_type` ";
+		$query_result = $this->db->query($query);
+		$this->data['expense_types'] = $query_result->result();
+
+
 		$month_income_expence_report = array();
 
 		for ($month = 1; $month <= 12; $month++) {
@@ -106,8 +156,26 @@ class Dashboard extends Admin_Controller
 				$month_income_expence_report[$DateQuery]['price'] = 0;
 				$month_income_expence_report[$DateQuery]['total_test'] = 0;
 			}
+
+			//get Expences 	
+			$query = "SELECT SUM(`expense_amount`) as total_expense 
+			          FROM `expenses` 
+					  WHERE `expenses`.`status` IN (0, 1) 
+					  AND YEAR(`expenses`.`created_date`) = '" . $year . "' 
+					  AND  MONTH(`expenses`.`created_date`) = '" . $month . "'";
+			$query_result = $this->db->query($query);
+
+			if ($query_result->result()[0]->total_expense) {
+				$month_income_expence_report[$DateQuery]['expense'] = $query_result->result()[0]->total_expense;
+			} else {
+				$month_income_expence_report[$DateQuery]['expense'] = 0;
+			}
+
+			$month_income_expence_report[$DateQuery]['net_income'] = ($month_income_expence_report[$DateQuery]['income'] - $month_income_expence_report[$DateQuery]['expense']);
 		}
 		$this->data['month_income_expence_report'] = $month_income_expence_report;
+
+		//day wise monthly Report
 
 		$month = date("m", time());
 		$year = date("Y", time());
@@ -136,6 +204,19 @@ class Dashboard extends Admin_Controller
 				$income_expence_report[$DateQuery]['price'] = 0;
 				$income_expence_report[$DateQuery]['total_test'] = 0;
 			}
+
+			//get Expences 	
+			$query = "SELECT SUM(`expense_amount`) as total_expense FROM `expenses` 
+					  WHERE `expenses`.`status` IN (0, 1) 
+					  AND DATE(`expenses`.`created_date`) = '" . $date_query . "'";
+			$query_result = $this->db->query($query);
+
+			if ($query_result->result()[0]->total_expense) {
+				$income_expence_report[$DateQuery]['expense'] = $query_result->result()[0]->total_expense;
+			} else {
+				$income_expence_report[$DateQuery]['expense'] = 0;
+			}
+			$this->data['income_expence_report'] = $income_expence_report;
 		}
 
 

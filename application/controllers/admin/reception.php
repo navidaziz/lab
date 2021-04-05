@@ -33,31 +33,6 @@ class Reception extends Admin_Controller
 
 		$where = "`invoices`.`status` IN (1,2,3) AND DATE(`invoices`.`created_date`) = DATE(NOW())  ORDER BY `invoices`.`invoice_id` DESC";
 		$this->data["all_tests"] = $this->invoice_model->get_invoice_list($where, false);
-
-
-		$today = date("Y-m-d", time());
-		$query = "SELECT sum(`total_price`) as `total_income`,
-						 sum(`discount`) as `discount`,
-						 sum(`price`) as `price`,
-						 COUNT(`invoice_id`) as `total_test` 
-							   FROM `invoices`
-						WHERE  `status` = 3
-						AND DATE(`invoices`.`created_date`) = '" . $today . "'";
-		$result = $this->db->query($query);
-		$total_income = $result->result()[0]->total_income;
-
-		if ($total_income) {
-			$this->data['total_income'] = $total_income;
-			$this->data['discount'] = $result->result()[0]->discount;
-			$this->data['price'] = $result->result()[0]->price;
-			$this->data['total_test'] = $result->result()[0]->total_test;
-		} else {
-			$this->data['total_income'] = 0;
-			$this->data['discount'] = 0;
-			$this->data['price'] = 0;
-			$this->data['total_test'] = 0;
-		}
-
 		$this->load->view(ADMIN_DIR . "reception/home", $this->data);
 	}
 

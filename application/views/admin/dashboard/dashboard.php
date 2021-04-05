@@ -3,58 +3,105 @@
     <div class="col-md-12">
       <div class="box border blue" id="messenger">
         <div class="box-title">
-          <h4 class="pull-left">Today</h4>
+          <h4 class="pull-left">Today Report</h4>
         </div>
         <div class="box-body">
           <div class="row">
             <div class="col-md-3">
+              <h4>Today</h4>
               <table class="table table-bordered">
-                <h4>Today</h4>
                 <tr>
                   <td style="color:green">
-                    <h5>Total Test</h5>
+                    Total Test
                   </td>
                   <td style="color:green">
-                    <h4><strong><?php echo $total_test; ?></strong></h4>
+                    <strong><?php echo $total_test; ?></strong>
                   </td>
                 </tr>
                 <tr>
                   <td style="color:green">
-                    <h5>Price</h5>
+                    Price
                   </td>
                   <td style="color:green">
-                    <h4><strong><?php echo $price; ?></strong></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="color:green">
-                    <h5>Discount</h5>
-                  </td>
-                  <td style="color:green">
-                    <h4><strong><?php echo $discount; ?></strong></h4>
+                    <strong><?php echo $price; ?></strong>
                   </td>
                 </tr>
                 <tr>
                   <td style="color:green">
-                    <h5>Income</h5>
+                    Discount
                   </td>
                   <td style="color:green">
-                    <h4><strong><?php echo $total_income; ?></strong></h4>
+                    <strong><?php echo $discount; ?></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:green">
+                    Income
+                  </td>
+                  <td style="color:green">
+                    <strong><?php echo $total_income; ?></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:red">
+                    Expense
+                  </td>
+                  <td style="color:green">
+                    <strong><?php echo $total_expenses; ?></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color:gray">
+                    Net Income
+                  </td>
+                  <td style="color:green">
+                    <strong><?php echo ($total_income - $total_expenses); ?></strong>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-3">
+              <h4>Today Expenses</h4>
+              <div>
+                <table class="table table-bordered">
+                  <tr>
+                    <td>Expense Type</td>
+                    <td>Total Expense</td>
+                  </tr>
+                  <?php
+                  $total_expense = 0;
+                  foreach ($today_expenses as $expense_type) {
+                    $total_expense += $expense_type->expense_total;
+                  ?>
+                    <tr>
+                      <td><?php echo ucwords(strtolower($expense_type->expense_type)); ?></td>
+                      <td><?php echo $expense_type->expense_total ?></td>
+                    </tr>
+                  <?php } ?>
+                </table>
+              </div>
+              <table class="table table-bordered">
+                <tr>
+                  <td>
+                    <h5>Total Expense</h5>
+                  </td>
+                  <td>
+                    <h5><strong><?php echo "Rs " . $total_expense; ?></h5></strong>
                   </td>
                 </tr>
               </table>
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-6">
               <table class="table table-bordered">
                 <h4>Refered By Doctors</h4>
                 <tr>
-                  <td>#</td>
-                  <td>Name</td>
-                  <td>Total Refered</td>
-                  <td>Previous Month</td>
-                  <td>Current Month</td>
-                  <td>Refered Today</td>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Total Refered</th>
+                  <th>Previous Month</th>
+                  <th>Current Month</th>
+                  <th>Refered Today</th>
                 </tr>
                 <?php
                 $count = 1;
@@ -97,20 +144,15 @@
                     <th>Test Price</th>
                     <th>Discount</th>
                     <th>Total</th>
-
+                    <th>Expense</th>
+                    <th>Income</th>
                   </tr>
                   <?php
                   $count = 0;
                   $total_income = 0;
-
                   $income_expence_reportarray = $income_expence_report;
                   krsort($income_expence_reportarray);
-
-                  //var_dump($income_expence_reportarray);
-
                   foreach ($income_expence_reportarray as $date => $report) {
-
-
                     $total_income += $report['income']; ?>
                     <tr <?php if ($count == 0) { ?> style="background-color:#9F9 !important; " <?php $count++;
                                                                                               } ?>>
@@ -118,8 +160,9 @@
                       <td><?php echo $report['total_test']; ?></td>
                       <td><?php echo $report['price']; ?></td>
                       <td><?php echo $report['discount']; ?></td>
-
                       <td><?php echo $report['income']; ?></td>
+                      <td><?php echo $report['expense']; ?></td>
+                      <td><?php echo ($report['income'] - $report['expense']); ?></td>
                     </tr>
                   <?php } ?>
                 </table>
@@ -167,6 +210,8 @@
                     <th>Test Price</th>
                     <th>Discount</th>
                     <th>Total</th>
+                    <th>Expense</th>
+                    <th>Income</th>
                   </tr>
                   <?php
 
@@ -178,6 +223,8 @@
                       <td><?php echo $report['price']; ?></td>
                       <td><?php echo $report['discount']; ?></td>
                       <td><?php echo $report['income']; ?></td>
+                      <td><?php echo $report['expense']; ?></td>
+                      <td><?php echo ($report['income'] - $report['expense']); ?></td>
                     </tr>
                   <?php } ?>
                 </table>
@@ -205,6 +252,8 @@
                   <th>Test Price</th>
                   <th>Discount</th>
                   <th>Total</th>
+                  <th>Expense</th>
+                  <th>Income</th>
                 </tr>
                 <tr>
                   <td>2019</td>
@@ -212,9 +261,13 @@
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>2020</td>
+                  <td>0</td>
+                  <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -230,6 +283,8 @@
                     <td><?php echo $report->price; ?></td>
                     <td><?php echo $report->discount; ?></td>
                     <td><?php echo $report->income_per_year; ?></td>
+                    <td><?php echo $report->expense_per_year; ?></td>
+                    <td><?php echo ($report->income_per_year - $report->expense_per_year); ?></td>
                   </tr>
                 <?php } ?>
               </table>
