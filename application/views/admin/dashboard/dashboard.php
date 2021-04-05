@@ -10,53 +10,52 @@
             <div class="col-md-3">
               <h4>Today</h4>
               <table class="table table-bordered">
-                <tr>
-                  <td style="color:green">
-                    Total Test
-                  </td>
-                  <td style="color:green">
-                    <strong><?php echo $total_test; ?></strong>
-                  </td>
+                <th>
+                  Total Test
+                </th>
+                <th>
+                  <strong><?php echo $total_test; ?></strong>
+                </th>
                 </tr>
                 <tr>
-                  <td style="color:green">
+                  <th>
                     Price
-                  </td>
-                  <td style="color:green">
+                  </th>
+                  <th>
                     <strong><?php echo $price; ?></strong>
-                  </td>
+                  </th>
                 </tr>
                 <tr>
-                  <td style="color:green">
+                  <th>
                     Discount
-                  </td>
-                  <td style="color:green">
+                  </th>
+                  <th>
                     <strong><?php echo $discount; ?></strong>
-                  </td>
+                  </th>
                 </tr>
                 <tr>
-                  <td style="color:green">
+                  <th>
                     Income
-                  </td>
-                  <td style="color:green">
+                  </th>
+                  <th>
                     <strong><?php echo $total_income; ?></strong>
-                  </td>
+                  </th>
                 </tr>
                 <tr>
-                  <td style="color:red">
+                  <th>
                     Expense
-                  </td>
-                  <td style="color:green">
+                  </th>
+                  <th>
                     <strong><?php echo $total_expenses; ?></strong>
-                  </td>
+                  </th>
                 </tr>
                 <tr>
-                  <td style="color:gray">
+                  <th>
                     Net Income
-                  </td>
-                  <td style="color:green">
+                  </th>
+                  <th>
                     <strong><?php echo ($total_income - $total_expenses); ?></strong>
-                  </td>
+                  </th>
                 </tr>
               </table>
             </div>

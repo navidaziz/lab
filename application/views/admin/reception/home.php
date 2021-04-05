@@ -7,13 +7,6 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
 <div class="row">
   <!-- MESSENGER -->
   <div class="col-md-3">
-
-
-
-
-
-
-
     <div class="box border blue" id="messenger">
       <div class="box-title">
         <h4><i class="fa fa-user"></i>Patient Detail</h4>
@@ -53,13 +46,16 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
         </table>
         <hr style="margin-top: -5px;" />
         <table style="width: 100%;">
+          <input style="display: none;" type="text" name="validate" id="validate" required="required" />
           <tr>
             <td>Patient Name: </td>
             <td><input type="text" name="patient_name" value="" id="patient_name" class="for m-control" style="" required="required" title="Name" placeholder="Name"></td>
           </tr>
           <tr>
             <td>Mobile No: </td>
-            <td><input type="text" name="patient_mobile_no" value="" id="patient_mobile_no" class="for m-control" style="" required="required" title="Mobile No" placeholder="Mobile No"></td>
+            <td><input type="text" minlength="11" name="patient_mobile_no" value="" id="patient_mobile_no" class="for m-control" style="" required="required" title="Mobile No" placeholder="Mobile No"></td>
+
+
           </tr>
           <tr>
             <td>Address: </td>
@@ -419,11 +415,13 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
   prices = [];
   var test_total_price = 0;
 
+
   function set_price(test_group_id, test_group_name, test_price, test_time) {
 
 
 
     if ($('#TG_' + test_group_id).is(':checked')) {
+      $('#validate').val("1");
       test_total_price = 0;
       prices[test_group_name] = {
         'price': test_price,
@@ -433,6 +431,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
     } else {
       test_total_price = 0;
       delete prices[test_group_name];
+      $('#validate').val("");
     }
     // prices.forEach(element => console.log(element));
     var price_list = '<table class="table table-bordered"><tr><td>#</td><td>Test Name</td><td>Price</td></tr>';
@@ -487,5 +486,14 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
   }
 </script>
 
+<script src="http://ipms.kpdata.gov.pk/assets/plugins/inputmaskv4/min/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+<script>
+  $(document).ready(function() {
 
+    $("body").on('focus', '#patient_mobile_no', function() {
+      $(this).inputmask("0999 9999999");
+    });
+
+  });
+</script>
 <?php $this->load->view(ADMIN_DIR . "reception/reception_footer"); ?>
