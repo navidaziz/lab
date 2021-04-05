@@ -211,6 +211,30 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
       </div>
       <div class="box-body" style="font-size: 12px !important;">
 
+        <div style="padding: 1px; text-align: right;">
+          <script>
+            function get_patient_search_result() {
+              var search = $('#search').val();
+              if (search != "") {
+                $.ajax({
+                  type: "POST",
+                  url: "<?php echo site_url(ADMIN_DIR); ?>/lab/get_patient_search_result/",
+                  data: {
+                    search: search
+                  }
+                }).done(function(data) {
+                  $('#search_result').html(data);
+                });
+              } else {
+                $('#search_result').html("");
+              }
+            }
+          </script>
+
+          Search Test <input onkeyup="get_patient_search_result()" type="text" name="search" id="search" class="form-control" style="width: 200px; display: inline;" />
+
+        </div>
+        <div id="search_result"></div>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -486,7 +510,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
   }
 </script>
 
-<script src="http://ipms.kpdata.gov.pk/assets/plugins/inputmaskv4/min/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+<script src="<?php echo site_url("assets/" . ADMIN_DIR . "js/jquery.inputmask.bundle.min.js"); ?>" type="text/javascript"></script>
 <script>
   $(document).ready(function() {
 
