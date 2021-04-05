@@ -320,6 +320,11 @@ class Lab extends Admin_Controller
 
 	public function get_patient_search_result()
 	{
+
+		$search = trim($this->input->post('search'));
+		if (!$search) {
+			return false;
+		}
 		$search = $this->db->escape("%" . $this->input->post('search') . "%");
 		$where = "`invoices`.`status` IN (1,2,3) 
 		AND (`invoice_id` LIKE " . $search . " 
