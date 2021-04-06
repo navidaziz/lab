@@ -41,7 +41,7 @@ class Mobile_messages extends Public_Controller
 		$query = "SELECT * FROM `sms`
 	 		 WHERE `sms`.`status`=0 ORDER BY `sms`.`priority` DESC  LIMIT 1";
 		$query_result = $this->db->query($query);
-		$mobile_sms = $query_result->result()[0];
+		@$mobile_sms = $query_result->result()[0];
 		if ($mobile_sms) {
 			$response["id"] = $mobile_sms->sms_id;
 			$response["mobile_number"] = $mobile_sms->mobile_number;
