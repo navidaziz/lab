@@ -9,7 +9,7 @@ class Public_Controller extends MY_Controller{
 		
 		 parent::__construct();
 		$this->load->helper("my_functions");
-		$this->load->model("admin/system_global_setting_model");
+	/*	$this->load->model("admin/system_global_setting_model");
 		$this->load->model("admin/menu_sub_page_model");
 		$this->lang->load("system", 'english');
 		$this->lang->load("home_page", 'english');
@@ -25,8 +25,6 @@ class Public_Controller extends MY_Controller{
 		$this->load->model("admin/gallery_model");
 		$this->lang->load("gallery", 'english');
 		$this->lang->load("contact_us_page", 'english');
-		$this->load->model("admin/restaurants_model");
-		$this->lang->load("system", 'english');
 		  
 		 
 		  $this->load->model("admin/menu_page_model");
@@ -53,6 +51,41 @@ class Public_Controller extends MY_Controller{
 		$this->data['page_description'] = "Page Description"; 
 		$this->data['page_title'] = "Page Name";	
 		//var_dump($this->data["menu_pages"]);	
+		
+		
+		
+				$query ="SELECT DISTINCT  `gener_title` , COUNT(  `gener_title` ) AS total 
+		FROM  `movie_genre` 
+		GROUP BY gener_title
+		ORDER BY gener_title ASC";
+		$query_result = $this->db->query($query);
+		
+		$this->data['movies_geners'] = $query_result->result(); 
+		
+		
+		
+		
+		$query ="SELECT DISTINCT FORMAT( FLOOR(  `rating` ) , 0 ) AS rating
+		FROM  `movies` 
+		ORDER BY  `rating` DESC ";
+		$query_result = $this->db->query($query);
+		
+		$this->data['movies_rating'] = $query_result->result(); 
+		
+		
+		
+		$query ="SELECT DISTINCT  `year` , COUNT(  `year` ) AS total
+		FROM  `movies` 
+		GROUP BY  `year` 
+		ORDER BY  `year` DESC";
+		$query_result = $this->db->query($query);
+		
+		$this->data['movies_years'] = $query_result->result(); 
+		
+		*/
+
+		
+		
        
     }
 	

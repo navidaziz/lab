@@ -22,7 +22,7 @@ class Mobile_messages extends Public_Controller
 
 		$query = "SELECT last_updated FROM `sms` WHERE status=1 ORDER BY last_updated DESC LIMIT 1";
 		$query_result = $this->db->query($query);
-		$last_updated = strtotime($query_result->result()[0]->last_updated);
+		$last_updated = strtotime(@$query_result->result()[0]->last_updated);
 		$sec_difference = time() - $last_updated;
 
 		if ($sec_difference <= 80) {
