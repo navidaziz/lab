@@ -229,6 +229,25 @@ class Lab extends Admin_Controller
 				, `remarks`= $remarks
 			    WHERE `invoice_id` = '" . $invoice_id . "'";
 		$this->db->query($query);
+		$query = "SELECT 
+			`invoices`.`invoice_id`,
+			`patients`.`patient_name`,
+			`patients`.`patient_mobile_no` 
+		FROM
+			`patients`,
+			`invoices` 
+		WHERE `patients`.`patient_id` = `invoices`.`patient_id` 
+		AND `invoices`.`invoice_id` = '" . $invoice_id . "'";
+		$patient_detail = $this->db->query($query)->result()[0];
+		$customer_name = $patient_detail->patient_name;
+		$mobile_number = $patient_detail->patient_mobile_no;
+		$message = 'CITY Medical Laboratory. ' . $customer_name . ', you medical test report has been ready. kindly collect your medical test report.';
+		if (strlen($mobile_number) == 11) {
+			if (substr($mobile_number, 0, 2) == '03') {
+				$this->db->query("INSERT INTO `sms`( `message`, `mobile_number`, `status`,`priority`) 
+		   						  VALUES ('" . $message . " ', " . $this->db->escape($mobile_number) . ", '0', '1')");
+			}
+		}
 		redirect(ADMIN_DIR . "reception/");
 	}
 
