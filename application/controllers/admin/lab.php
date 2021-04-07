@@ -241,7 +241,7 @@ class Lab extends Admin_Controller
 		$patient_detail = $this->db->query($query)->result()[0];
 		$customer_name = $patient_detail->patient_name;
 		$mobile_number = $patient_detail->patient_mobile_no;
-		$message = 'CITY Medical Laboratory. ' . $customer_name . ', you medical test report has been ready. kindly collect your medical test report.';
+		$message = 'CITY Medical Laboratory. Dear ' . $customer_name . ', your laboratory test report has been ready. kindly collect your laboratory test report.';
 		if (strlen($mobile_number) == 11) {
 			if (substr($mobile_number, 0, 2) == '03') {
 				$this->db->query("INSERT INTO `sms`( `message`, `mobile_number`, `status`,`priority`) 
