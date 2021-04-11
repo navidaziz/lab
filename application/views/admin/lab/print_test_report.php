@@ -83,7 +83,7 @@
     .table>tbody>tr>td,
     .table>tfoot>tr>td {
       padding: 8px;
-      line-height: 0.628571;
+      line-height: 1;
       vertical-align: top;
       border-top: 1px solid #ddd;
       font-size: 15px !important;
