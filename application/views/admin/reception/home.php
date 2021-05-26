@@ -70,9 +70,9 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
             <td><input type="radio" name="patient_gender" value="Male" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Male</label><input type="radio" name="patient_gender" value="Female" id="patient_gender" style="" required="required" class="uniform"><label for="patient_gender" style="margin-left:10px;">Female</label></td>
           </tr>
           <tr>
-            <td>Refereed By: </td>
+            <td>Referred By: </td>
             <td><select class="for m-control" required name="refered_by">
-                <option value="">Refered By</option>
+                <option value="">Referred By</option>
                 <?php
 
                 $query = "SELECT * FROM `doctors` WHERE `status`=1";
@@ -266,7 +266,7 @@ echo form_open_multipart(ADMIN_DIR . "reception/save_data", $add_form_attr);
               <td><?php echo $test->patient_name; ?></td>
               <td><?php echo $test->patient_mobile_no; ?></td>
               <td>
-                <a style="margin-left: 10px;" target="new" href="<?php echo site_url(ADMIN_DIR . "lab/print_patient_test_receipts/$test->invoice_id") ?>"><i class="fa fa-print" aria-hidden="true"></i> Receipts</a>
+                <a style="margin-left: 10px;" target="new" href="<?php echo site_url(ADMIN_DIR . "lab/print_patient_test_receipts/$test->invoice_id") ?>"><i class="fa fa-print" aria-hidden="true"></i> Receipt</a>
 
                 <?php
                 // $query = "SELECT
